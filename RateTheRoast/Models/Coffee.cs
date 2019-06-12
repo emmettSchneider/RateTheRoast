@@ -5,28 +5,38 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RateTheRoast.Models
 {
-    // Table Roaster {
-  //  Id int[pk]
-  //  Name varchar
-  //  City varchar
-  //  State char (2)
-  //ImagePath varchar
-//}
-public class Coffee
+    public class Coffee
     {
         [Key]
+        public int CoffeeId { get; set; }
+
+        [Required]
         public int RoasterId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public string City { get; set; }
+        public string Origin { get; set; }
+
+        public string Region { get; set; }
 
         [Required]
-        public string State { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        public int RoastIntensityId { get; set; }
 
         public string ImagePath { get; set; }
 
+        [Required]
+        public Roaster Roaster { get; set; }
+
+        [Required]
+        public RoastIntensity RoastIntensity { get; set; }
+
+        public ICollection<Favorite> Favorites { get; set; }
+
     }
 }
+

@@ -7,11 +7,14 @@ namespace RateTheRoast.Models
     public class Favorite
     {
         [Key]
-        public int UserId { get; set; }
+        public int FavoriteId { get; set; }
 
-        [Key]
+        [Required]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
+        [Required]
         public int CoffeeId { get; set; }
-
-        public virtual ICollection<Coffee> Coffees { get; set; }
+        public Coffee Coffee { get; set; }
     }
 }

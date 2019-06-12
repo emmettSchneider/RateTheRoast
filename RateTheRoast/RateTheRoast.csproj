@@ -6,6 +6,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20190612161455_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190612161455_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190612170938_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190612170938_RateTheRoastTables.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

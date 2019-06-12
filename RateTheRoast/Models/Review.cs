@@ -8,10 +8,13 @@ namespace RateTheRoast.Models
     public class Review
     {
         [Key]
+        public int ReviewId { get; set; }
+
+        [Required]
         public int CoffeeId { get; set; }
 
-        [Key]
-        public int UserId { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -20,18 +23,27 @@ namespace RateTheRoast.Models
 
         [DataType(DataType.Date)]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime DateEdited { get; set; }
+        public DateTime? DateEdited { get; set; }
 
-        [Key]
         public int BrewMethodId { get; set; }
 
         public double Price { get; set; }
 
-        [Key]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
+        [Required]
         public string Narrative { get; set; }
 
+        [Required]
         public int Score { get; set; }
+        
+        public ApplicationUser User { get; set; }
+
+        public Coffee Coffee { get; set; }
+
+        public Location Location { get; set; }
+
+        public BrewMethod BrewMethod { get; set; }
     }
 }
+

@@ -6,7 +6,12 @@ namespace RateTheRoast.Models
 {
     public class BrewMethod
     {
+        [Key]
+        public int BrewMethodId { get; set; }
         public string Method { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
 
     }
 }
+

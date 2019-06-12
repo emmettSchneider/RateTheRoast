@@ -6,6 +6,10 @@ namespace RateTheRoast.Models
 {
     public class RoastIntensity
     {
+        [Key]
+        public int RoastIntensityId { get; set; }
         public string Intensity { get; set; }
+
+        public ICollection<Coffee> Coffees { get; set; }
     }
 }
