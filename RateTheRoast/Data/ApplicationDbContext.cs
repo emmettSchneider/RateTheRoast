@@ -39,7 +39,6 @@ namespace RateTheRoast.Data
                 SecurityStamp = Guid.NewGuid().ToString("D"),
                 City = "Nashville",
                 State = "TN",
-                IsRoaster = false,
                 IsAdministrator = true
             };
             var passwordHash = new PasswordHasher<ApplicationUser>();
@@ -57,7 +56,6 @@ namespace RateTheRoast.Data
                 SecurityStamp = Guid.NewGuid().ToString("D"),
                 City = "Chattanooga",
                 State = "TN",
-                IsRoaster = false,
                 IsAdministrator = false
             };
             passwordHash = new PasswordHasher<ApplicationUser>();
@@ -75,7 +73,6 @@ namespace RateTheRoast.Data
                 SecurityStamp = Guid.NewGuid().ToString("D"),
                 City = "Nashville",
                 State = "TN",
-                IsRoaster = true,
                 IsAdministrator = false
             };
             passwordHash = new PasswordHasher<ApplicationUser>();
@@ -191,6 +188,7 @@ namespace RateTheRoast.Data
                 new Roaster()
                 {
                     RoasterId = 1,
+                    UserId = user3.Id,
                     Name = "Bongo Java",
                     City = "Nashville",
                     State = "TN",
@@ -199,6 +197,7 @@ namespace RateTheRoast.Data
                 new Roaster()
                 {
                     RoasterId = 2,
+                    UserId = null,
                     Name = "Revelator Coffee Company",
                     City = "Birmingham",
                     State = "AL",
@@ -207,6 +206,7 @@ namespace RateTheRoast.Data
                 new Roaster()
                 {
                     RoasterId = 3,
+                    UserId = null,
                     Name = "Folgers",
                     City = "New Orleans",
                     State = "LA",
@@ -215,6 +215,7 @@ namespace RateTheRoast.Data
                 new Roaster()
                 {
                     RoasterId = 4,
+                    UserId = null,
                     Name = "Intelligentsia",
                     City = "Chicago",
                     State = "IL",
@@ -223,6 +224,7 @@ namespace RateTheRoast.Data
                 new Roaster()
                 {
                     RoasterId = 5,
+                    UserId = null,
                     Name = "Frothy Monkey",
                     City = "Nashville",
                     State = "TN",
@@ -280,7 +282,7 @@ namespace RateTheRoast.Data
                 {
                     ReviewId = 1,
                     CoffeeId = 1,
-                    UserId = 2,
+                    UserId = user2.Id,
                     BrewMethodId = 6,
                     Price = 12.99,
                     LocationId = 2,
@@ -292,7 +294,7 @@ namespace RateTheRoast.Data
                 {
                     ReviewId = 2,
                     CoffeeId = 4,
-                    UserId = 2,
+                    UserId = user2.Id,
                     BrewMethodId = 6,
                     Price = 15.99,
                     LocationId = 1,
@@ -305,7 +307,7 @@ namespace RateTheRoast.Data
                 new Favorite()
                 {
                     FavoriteId = 1,
-                    UserId = 2,
+                    UserId = user2.Id,
                     CoffeeId = 4
                 });
         }

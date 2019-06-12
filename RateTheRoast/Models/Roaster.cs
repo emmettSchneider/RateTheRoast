@@ -10,6 +10,9 @@ namespace RateTheRoast.Models
         [Key]
         public int RoasterId { get; set; }
 
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
         [Required]
         public string Name { get; set; }
 
