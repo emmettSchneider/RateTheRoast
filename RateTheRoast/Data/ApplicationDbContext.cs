@@ -107,8 +107,7 @@ namespace RateTheRoast.Data
                 {
                     RoastIntensityId = 5,
                     Intensity = "Dark"
-                }
-            );
+                });
 
             modelBuilder.Entity<BrewMethod>().HasData(
 
@@ -152,8 +151,7 @@ namespace RateTheRoast.Data
                 {
                     BrewMethodId = 8,
                     Method = "Vacuum pot / Siphon"
-                }
-            );
+                });
 
             modelBuilder.Entity<Location>().HasData(
                 new Location()
@@ -187,8 +185,7 @@ namespace RateTheRoast.Data
                     Address = "711 Gallatin Ave",
                     City = "Nashville",
                     State = "TN"
-                }
-            );
+                });
 
             modelBuilder.Entity<Roaster>().HasData(
                 new Roaster()
@@ -230,9 +227,7 @@ namespace RateTheRoast.Data
                     City = "Nashville",
                     State = "TN",
                     ImagePath = null
-                }
-            );
-
+                });
 
             modelBuilder.Entity<Coffee>().HasData(
                 new Coffee()
@@ -278,8 +273,7 @@ namespace RateTheRoast.Data
                     Description = "This is an insanely smooth, balanced coffee, with notes of caramel apples, figs, and cashews throughout. It’s acidity is subtly citrusy, just like a clementine, and it’s sweetness is like strawberry candy.",
                     RoastIntensityId = 2,
                     ImagePath = null
-                }
-            );
+                });
 
             modelBuilder.Entity<Review>().HasData(
                 new Review()
@@ -305,8 +299,15 @@ namespace RateTheRoast.Data
                     Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                     Score = 9,
                     DateEdited = null
-                }
-            );
+                });
+
+            modelBuilder.Entity<Favorite>().HasData(
+                new Favorite()
+                {
+                    FavoriteId = 1,
+                    UserId = 2,
+                    CoffeeId = 4
+                });
         }
     }
 }

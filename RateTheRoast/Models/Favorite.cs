@@ -11,12 +11,10 @@ namespace RateTheRoast.Models
 
         [Required]
         public int UserId { get; set; }
-        [Required]
         public ApplicationUser User { get; set; }
 
         [Required]
         public int CoffeeId { get; set; }
-        [Required]
         public Coffee Coffee { get; set; }
     }
 }
