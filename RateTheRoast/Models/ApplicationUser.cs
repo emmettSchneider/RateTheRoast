@@ -12,17 +12,15 @@ namespace RateTheRoast.Models
         }
 
         [Required]
-        public string Username { get; set; }
-
-        [Required]
         public string City { get; set; }
 
         [Required]
         public string State { get; set; }
 
-        public virtual ICollection<Favorite> Favorites { get; set; }
+        public bool IsAdministrator { get; set; }
 
-        public virtual ICollection<Review> Reviews { get; set; }
+        public bool IsRoaster { get; set; }
 
     }
 }
+

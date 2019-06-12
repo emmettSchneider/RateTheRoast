@@ -7,7 +7,9 @@ namespace RateTheRoast.Models
 {
     public class Roaster
     {
-       
+        [Key]
+        public int RoasterId { get; set; }
+
         [Required]
         public string Name { get; set; }
 
@@ -19,7 +21,6 @@ namespace RateTheRoast.Models
 
         [Display(Name = "Roaster Logo")]
         public string ImagePath { get; set; }
-
-
     }
 }
+
