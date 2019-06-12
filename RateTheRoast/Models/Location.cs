@@ -16,5 +16,7 @@ namespace RateTheRoast.Models
 
         public string State { get; set; }
 
+        public ICollection<Review> Reviews { get; set; }
+
     }
 }

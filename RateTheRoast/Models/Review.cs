@@ -36,6 +36,16 @@ namespace RateTheRoast.Models
 
         [Required]
         public int Score { get; set; }
+        
+        [Required]
+        public ApplicationUser User { get; set; }
+
+        [Required]
+        public Coffee Coffee { get; set; }
+
+        public Location Location { get; set; }
+
+        public BrewMethod BrewMethod { get; set; }
     }
 }
 
