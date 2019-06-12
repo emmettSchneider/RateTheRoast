@@ -10,8 +10,8 @@ using RateTheRoast.Data;
 namespace RateTheRoast.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190612173937_add-migration RateTheRoastTables")]
-    partial class addmigrationRateTheRoastTables
+    [Migration("20190612200822_RateTheRoastTables")]
+    partial class RateTheRoastTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,6 +153,9 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("Handle")
+                        .IsRequired();
+
                     b.Property<bool>("IsAdministrator");
 
                     b.Property<bool>("LockoutEnabled");
@@ -161,6 +164,9 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedHandle")
+                        .IsRequired();
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
@@ -196,60 +202,66 @@ namespace RateTheRoast.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6235a0ba-95cc-4e41-83ad-ec28578b3b6f",
+                            Id = "a13835f6-bc5c-48ef-a515-bb435c87c9d3",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "949a00d7-e441-49ac-b63f-0b001e9eb026",
+                            ConcurrencyStamp = "922a4e27-ae67-4010-9ad6-5da450e2e594",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
+                            Handle = "admin",
                             IsAdministrator = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKYHUvWxVTUvA4XBQrWDkqCyRsTz0C2a6zJ6UT2xH6uHlvVSUXB5KN1H8gC1bu69MA==",
+                            NormalizedHandle = "ADMIN",
+                            NormalizedUserName = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELyLGtFgSM7BKHm4BFtZQUhUQHhOG/4svWN+V5xlH+WC1vk9Tbr33IOo7iI4R3dK/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4567ac3d-d3e0-449b-9b1e-0bcd8d0aa1cf",
+                            SecurityStamp = "c7f7e7d0-2ed6-4ec0-97d1-ee332a0dec3f",
                             State = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "admin@admin.com"
                         },
                         new
                         {
-                            Id = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b",
+                            Id = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e",
                             AccessFailedCount = 0,
                             City = "Chattanooga",
-                            ConcurrencyStamp = "34671055-9794-40d1-973c-cb5edf9d8caa",
+                            ConcurrencyStamp = "cdf624f4-174c-4774-bd68-d76b6280d0c7",
                             Email = "barnyardbarista@hotmail.com",
                             EmailConfirmed = true,
+                            Handle = "BarnyardBarista",
                             IsAdministrator = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
-                            NormalizedUserName = "BARNYARDBARISTA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA9ZxkIc4c/2SzkJqkEIqZZE+TSKmLgkXg/GkkGTeAAcVn3uylvnpkcJIQDBvGLZYg==",
+                            NormalizedHandle = "BARNYARDBARISTA",
+                            NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJZOTKXxbhVjd8HdvNP56OwTw7uB5mNf8ukVgTZfmV/XUaRQfmpbJufhBWXt4WG7qg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fd699e60-3126-4390-b1ab-0e03726ad5c6",
+                            SecurityStamp = "771b9a4b-9d62-4013-afba-4267e613837e",
                             State = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "BarnyardBarista"
+                            UserName = "barnyardbarista@hotmail.com"
                         },
                         new
                         {
-                            Id = "9692dd2b-b06b-48e2-a43c-dd8c77ae2814",
+                            Id = "036754c8-e814-4296-b239-4e08cf89d905",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "2f734933-5561-4c9d-804a-973a7f2d97a1",
+                            ConcurrencyStamp = "24a8e24b-d003-4901-9c2b-60d8e6516cfd",
                             Email = "info@bongojava.com",
                             EmailConfirmed = true,
+                            Handle = "BongoJava",
                             IsAdministrator = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "INFO@BONGOJAVA.COM",
-                            NormalizedUserName = "BONGOJAVA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK7hhTbIkTrO/PQZuchyoGulVX8mmdV+fZbef9/6+khBPwFMKILaNhAx6mS8cCrvnA==",
+                            NormalizedHandle = "BONGOJAVA",
+                            NormalizedUserName = "INFO@BONGOJAVA.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBSZFqbnTRhk26euO3xp57S25TVCb5pEfSTIOHrzymCtkpln3fbzh9EFVq2fcKs0Gg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "235aca19-7d28-4ce0-b615-0c72864da69a",
+                            SecurityStamp = "c5dd10ce-0677-4620-a286-3feccaaa27f8",
                             State = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "BongoJava"
+                            UserName = "info@bongojava.com"
                         });
                 });
 
@@ -405,7 +417,7 @@ namespace RateTheRoast.Data.Migrations
                         {
                             FavoriteId = 1,
                             CoffeeId = 4,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
                         });
                 });
 
@@ -514,7 +526,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!",
                             Price = 12.99,
                             Score = 9,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
                         },
                         new
                         {
@@ -526,7 +538,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                             Price = 15.99,
                             Score = 9,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
                         });
                 });
 
@@ -604,7 +616,7 @@ namespace RateTheRoast.Data.Migrations
                             City = "Nashville",
                             Name = "Bongo Java",
                             State = "TN",
-                            UserId = "9692dd2b-b06b-48e2-a43c-dd8c77ae2814"
+                            UserId = "036754c8-e814-4296-b239-4e08cf89d905"
                         },
                         new
                         {

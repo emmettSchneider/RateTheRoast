@@ -30,13 +30,15 @@ namespace RateTheRoast.Data
 
             ApplicationUser user = new ApplicationUser
             {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
                 Email = "admin@admin.com",
                 NormalizedEmail = "ADMIN@ADMIN.COM",
                 EmailConfirmed = true,
                 LockoutEnabled = false,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "admin",
+                NormalizedHandle = "ADMIN",
                 City = "Nashville",
                 State = "TN",
                 IsAdministrator = true
@@ -47,13 +49,15 @@ namespace RateTheRoast.Data
 
             ApplicationUser user2 = new ApplicationUser
             {
-                UserName = "BarnyardBarista",
-                NormalizedUserName = "BARNYARDBARISTA",
+                UserName = "barnyardbarista@hotmail.com",
+                NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
                 Email = "barnyardbarista@hotmail.com",
                 NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
                 EmailConfirmed = true,
                 LockoutEnabled = false,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "BarnyardBarista",
+                NormalizedHandle = "BARNYARDBARISTA",
                 City = "Chattanooga",
                 State = "TN",
                 IsAdministrator = false
@@ -64,13 +68,15 @@ namespace RateTheRoast.Data
 
             ApplicationUser user3 = new ApplicationUser
             {
-                UserName = "BongoJava",
-                NormalizedUserName = "BONGOJAVA",
+                UserName = "info@bongojava.com",
+                NormalizedUserName = "INFO@BONGOJAVA.COM",
                 Email = "info@bongojava.com",
                 NormalizedEmail = "INFO@BONGOJAVA.COM",
                 EmailConfirmed = true,
                 LockoutEnabled = false,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "BongoJava",
+                NormalizedHandle = "BONGOJAVA",
                 City = "Nashville",
                 State = "TN",
                 IsAdministrator = false

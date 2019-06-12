@@ -15,6 +15,10 @@ namespace RateTheRoast.Models
         public string City { get; set; }
         [Required]
         public string State { get; set; }
+        [Required]
+        public string Handle { get; set; }
+        [Required]
+        public string NormalizedHandle { get; set; }
         public bool IsAdministrator { get; set; }
 
         public Roaster Roaster { get; set; }

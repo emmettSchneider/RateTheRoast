@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RateTheRoast.Data.Migrations
 {
-    public partial class addmigrationRateTheRoastTables : Migration
+    public partial class RateTheRoastTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,11 +14,23 @@ namespace RateTheRoast.Data.Migrations
                 nullable: false,
                 defaultValue: "");
 
+            migrationBuilder.AddColumn<string>(
+                name: "Handle",
+                table: "AspNetUsers",
+                nullable: false,
+                defaultValue: "");
+
             migrationBuilder.AddColumn<bool>(
                 name: "IsAdministrator",
                 table: "AspNetUsers",
                 nullable: false,
                 defaultValue: false);
+
+            migrationBuilder.AddColumn<string>(
+                name: "NormalizedHandle",
+                table: "AspNetUsers",
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "State",
@@ -195,12 +207,12 @@ namespace RateTheRoast.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsAdministrator", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Handle", "IsAdministrator", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedHandle", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6235a0ba-95cc-4e41-83ad-ec28578b3b6f", 0, "Nashville", "949a00d7-e441-49ac-b63f-0b001e9eb026", "admin@admin.com", true, true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAEAACcQAAAAEKYHUvWxVTUvA4XBQrWDkqCyRsTz0C2a6zJ6UT2xH6uHlvVSUXB5KN1H8gC1bu69MA==", null, false, "4567ac3d-d3e0-449b-9b1e-0bcd8d0aa1cf", "TN", false, "admin" },
-                    { "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b", 0, "Chattanooga", "34671055-9794-40d1-973c-cb5edf9d8caa", "barnyardbarista@hotmail.com", true, false, false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "AQAAAAEAACcQAAAAEA9ZxkIc4c/2SzkJqkEIqZZE+TSKmLgkXg/GkkGTeAAcVn3uylvnpkcJIQDBvGLZYg==", null, false, "fd699e60-3126-4390-b1ab-0e03726ad5c6", "TN", false, "BarnyardBarista" },
-                    { "9692dd2b-b06b-48e2-a43c-dd8c77ae2814", 0, "Nashville", "2f734933-5561-4c9d-804a-973a7f2d97a1", "info@bongojava.com", true, false, false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "AQAAAAEAACcQAAAAEK7hhTbIkTrO/PQZuchyoGulVX8mmdV+fZbef9/6+khBPwFMKILaNhAx6mS8cCrvnA==", null, false, "235aca19-7d28-4ce0-b615-0c72864da69a", "TN", false, "BongoJava" }
+                    { "a13835f6-bc5c-48ef-a515-bb435c87c9d3", 0, "Nashville", "922a4e27-ae67-4010-9ad6-5da450e2e594", "admin@admin.com", true, "admin", true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAELyLGtFgSM7BKHm4BFtZQUhUQHhOG/4svWN+V5xlH+WC1vk9Tbr33IOo7iI4R3dK/w==", null, false, "c7f7e7d0-2ed6-4ec0-97d1-ee332a0dec3f", "TN", false, "admin@admin.com" },
+                    { "16fe5d33-9d65-4b41-8bdb-9136257a7f0e", 0, "Chattanooga", "cdf624f4-174c-4774-bd68-d76b6280d0c7", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEJZOTKXxbhVjd8HdvNP56OwTw7uB5mNf8ukVgTZfmV/XUaRQfmpbJufhBWXt4WG7qg==", null, false, "771b9a4b-9d62-4013-afba-4267e613837e", "TN", false, "barnyardbarista@hotmail.com" },
+                    { "036754c8-e814-4296-b239-4e08cf89d905", 0, "Nashville", "24a8e24b-d003-4901-9c2b-60d8e6516cfd", "info@bongojava.com", true, "BongoJava", false, false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEBSZFqbnTRhk26euO3xp57S25TVCb5pEfSTIOHrzymCtkpln3fbzh9EFVq2fcKs0Gg==", null, false, "c5dd10ce-0677-4620-a286-3feccaaa27f8", "TN", false, "info@bongojava.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -265,7 +277,7 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Roaster",
                 columns: new[] { "RoasterId", "City", "ImagePath", "Name", "State", "UserId" },
-                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "9692dd2b-b06b-48e2-a43c-dd8c77ae2814" });
+                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "036754c8-e814-4296-b239-4e08cf89d905" });
 
             migrationBuilder.InsertData(
                 table: "Coffee",
@@ -279,17 +291,17 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Favorite",
                 columns: new[] { "FavoriteId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 4, "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b" });
+                values: new object[] { 1, 4, "16fe5d33-9d65-4b41-8bdb-9136257a7f0e" });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 2, 6, 4, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b" });
+                values: new object[] { 2, 6, 4, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "16fe5d33-9d65-4b41-8bdb-9136257a7f0e" });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 1, 6, 1, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b" });
+                values: new object[] { 1, 6, 1, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "16fe5d33-9d65-4b41-8bdb-9136257a7f0e" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Coffee_RoastIntensityId",
@@ -365,24 +377,32 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b");
+                keyValue: "036754c8-e814-4296-b239-4e08cf89d905");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "6235a0ba-95cc-4e41-83ad-ec28578b3b6f");
+                keyValue: "16fe5d33-9d65-4b41-8bdb-9136257a7f0e");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "9692dd2b-b06b-48e2-a43c-dd8c77ae2814");
+                keyValue: "a13835f6-bc5c-48ef-a515-bb435c87c9d3");
 
             migrationBuilder.DropColumn(
                 name: "City",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
+                name: "Handle",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
                 name: "IsAdministrator",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "NormalizedHandle",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
