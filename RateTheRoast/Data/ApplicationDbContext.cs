@@ -23,25 +23,6 @@ namespace RateTheRoast.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
-
-            //Ref: "Coffee"."RoasterId" > "Roaster"."Id"
-
-            //Ref: "Coffee"."RoastIntensityId" > "RoastIntensity"."Id"
-
-            //Ref: "Review"."CoffeeId" > "Coffee"."Id"
-
-            //Ref: "Review"."UserId" > "ApplicationUser"."Id"
-
-            //Ref: "Review"."LocationId" > "Location"."Id"
-
-            //Ref: "Review"."BrewMethodId" > "BrewMethod"."Id"
-
-            //Ref: "Favorite"."UserId" > "ApplicationUser"."Id"
-
-            //Ref: "Favorite"."CoffeeId" - "Coffee"."Id"
 
             modelBuilder.Entity<Review>()
                 .Property(b => b.DateCreated)
