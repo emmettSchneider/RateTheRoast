@@ -311,5 +311,7 @@ namespace RateTheRoast.Data
                     CoffeeId = 4
                 });
         }
+
+        public DbSet<RateTheRoast.Models.Favorite> Favorite { get; set; }
     }
 }
