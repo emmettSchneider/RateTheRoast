@@ -20,10 +20,33 @@ namespace RateTheRoast.Views
         }
 
         // GET: Coffees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var applicationDbContext = _context.Coffee.Include(c => c.RoastIntensity).Include(c => c.Roaster);
-            return View(await applicationDbContext.ToListAsync());
+            ViewBag.SearchString = false;
+
+            if (SearchString != null)
+            {
+
+                var applicationDbContext = _context.Coffee.Include(r => r.Roaster)
+
+                   .Where(c => c.Name.Contains(SearchString) || c.Roaster.Name.Contains(SearchString)
+                   || c.Roaster.City.Contains(SearchString))
+
+                   .OrderByDescending(c => c.Name);
+                ViewBag.SearchString = true;
+                return View(await applicationDbContext.ToListAsync());
+            }
+            // if the search bar is blank the complete list of products will be returned to the user
+            else
+            {
+                var applicationDbContext = _context.Coffee
+                    .Include(c => c.Name);
+                    //.Include(c => c.DateAdded)
+                    //.OrderByDescending(c => c.DateAdded).Take(20);
+
+                return View(await applicationDbContext.ToListAsync());
+            }
+
         }
 
         // GET: Coffees/Details/5
