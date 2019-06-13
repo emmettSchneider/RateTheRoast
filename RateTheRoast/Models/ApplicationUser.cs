@@ -26,5 +26,6 @@ namespace RateTheRoast.Models
         public ICollection<Favorite> Favorites { get; set; }
 
     }
+
 }
 

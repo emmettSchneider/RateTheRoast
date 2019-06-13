@@ -14,6 +14,7 @@ using RateTheRoast.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RateTheRoast.Models;
+using RateTheRoast.Interfaces;
 
 namespace RateTheRoast
 {
@@ -42,6 +43,8 @@ namespace RateTheRoast
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, MyUserClaimsPrincipalFactory>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
