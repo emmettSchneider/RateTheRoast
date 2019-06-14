@@ -30,6 +30,11 @@ namespace RateTheRoast.Models
         public string ImagePath { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime DateAdded { get; set; }
+
+        [Required]
         public Roaster Roaster { get; set; }
 
         [Required]

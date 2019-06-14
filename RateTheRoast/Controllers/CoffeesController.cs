@@ -40,9 +40,7 @@ namespace RateTheRoast.Views
             else
             {
                 var applicationDbContext = _context.Coffee
-                    .Include(c => c.Name);
-                    //.Include(c => c.DateAdded)
-                    //.OrderByDescending(c => c.DateAdded).Take(20);
+                    .OrderByDescending(c => c.DateAdded).Take(20); 
 
                 return View(await applicationDbContext.ToListAsync());
             }

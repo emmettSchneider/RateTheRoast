@@ -28,6 +28,10 @@ namespace RateTheRoast.Data
                 .Property(b => b.DateCreated)
                 .HasDefaultValueSql("GETDATE()");
 
+            modelBuilder.Entity<Coffee>()
+                .Property(c => c.DateAdded)
+                .HasDefaultValueSql("GETDATE()");
+
             ApplicationUser user = new ApplicationUser
             {
                 UserName = "admin@admin.com",

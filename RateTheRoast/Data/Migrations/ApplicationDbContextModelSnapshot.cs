@@ -200,10 +200,10 @@ namespace RateTheRoast.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a13835f6-bc5c-48ef-a515-bb435c87c9d3",
+                            Id = "fa55afa9-c029-416e-bda8-7010a8f95cca",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "922a4e27-ae67-4010-9ad6-5da450e2e594",
+                            ConcurrencyStamp = "956fa6fb-f304-4bbe-814a-07066cc8a3d9",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             Handle = "admin",
@@ -212,19 +212,19 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedHandle = "ADMIN",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELyLGtFgSM7BKHm4BFtZQUhUQHhOG/4svWN+V5xlH+WC1vk9Tbr33IOo7iI4R3dK/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJKSK/lCuiYCx4FB8sDH5DqCIzwqvLN+tERGckiu22QcRnuwrmRRwHKq7LeVry8DDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c7f7e7d0-2ed6-4ec0-97d1-ee332a0dec3f",
+                            SecurityStamp = "0cc7f5d8-b016-41d3-b217-15c805c7141a",
                             State = "TN",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
                         new
                         {
-                            Id = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e",
+                            Id = "9ba8a144-4ee3-4691-97f2-9bb81cf91e39",
                             AccessFailedCount = 0,
                             City = "Chattanooga",
-                            ConcurrencyStamp = "cdf624f4-174c-4774-bd68-d76b6280d0c7",
+                            ConcurrencyStamp = "b55e358b-4397-40b7-9315-cc4bd08f6025",
                             Email = "barnyardbarista@hotmail.com",
                             EmailConfirmed = true,
                             Handle = "BarnyardBarista",
@@ -233,19 +233,19 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
                             NormalizedHandle = "BARNYARDBARISTA",
                             NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJZOTKXxbhVjd8HdvNP56OwTw7uB5mNf8ukVgTZfmV/XUaRQfmpbJufhBWXt4WG7qg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBTZc1gucXfoTy5fH8eOWA9ezUN7/BESGWhruiOjQpPsdWEIFnAXC5ruwWnNLaWdww==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "771b9a4b-9d62-4013-afba-4267e613837e",
+                            SecurityStamp = "d14a05fc-99ab-4a4c-8051-12998ce586a0",
                             State = "TN",
                             TwoFactorEnabled = false,
                             UserName = "barnyardbarista@hotmail.com"
                         },
                         new
                         {
-                            Id = "036754c8-e814-4296-b239-4e08cf89d905",
+                            Id = "8f241ddf-8b31-47f1-9f15-214df6c2ef57",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "24a8e24b-d003-4901-9c2b-60d8e6516cfd",
+                            ConcurrencyStamp = "016595fd-c534-4ee0-8b3b-30975a1b9d58",
                             Email = "info@bongojava.com",
                             EmailConfirmed = true,
                             Handle = "BongoJava",
@@ -254,9 +254,9 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "INFO@BONGOJAVA.COM",
                             NormalizedHandle = "BONGOJAVA",
                             NormalizedUserName = "INFO@BONGOJAVA.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBSZFqbnTRhk26euO3xp57S25TVCb5pEfSTIOHrzymCtkpln3fbzh9EFVq2fcKs0Gg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELaxFrquVEIVPcXFRBuEMHcENh7Cbr8+gX2TnfE66hznKLK3GemlkyAjgC9pF2M7HQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c5dd10ce-0677-4620-a286-3feccaaa27f8",
+                            SecurityStamp = "d99d515b-b5f5-4c9b-abe3-8aecb60da697",
                             State = "TN",
                             TwoFactorEnabled = false,
                             UserName = "info@bongojava.com"
@@ -324,6 +324,10 @@ namespace RateTheRoast.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateAdded")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GETDATE()");
+
                     b.Property<string>("Description")
                         .IsRequired();
 
@@ -353,6 +357,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 1,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A nod to our hometown, lovingly referred to as the Buckle of the Bible Belt. Flavor notes of Brown Sugar, Cocoa, and Baked Pear",
                             Name = "Bible Belt",
                             Origin = "Blend",
@@ -362,6 +367,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 2,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "SOTARÁ EDITION | After four lots from Nariño, our Tres Santos tour of Colombia's most exciting growing regions takes us to Cauca, where we have been working since 2016 with a group of 80 smallholder farmers committed to quality. We blended the four best single-farm lots of the bunch for this Tres Santos offering, which comes from the farms of Hover Guevara, Eudaro Garzón, José Chicangana, and Ramón Manzano. Flavor Notes: Apple, Caramel, Baked Lemon",
                             Name = "Colombia Tres Santos",
                             Origin = "Colombia",
@@ -372,6 +378,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 3,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ethiopia is where coffee was discovered and these are some of the best organic beans this country has to offer. A floral cup with delicate sweet lemon acidity, strong aroma of bergamont and jasmine flowers. Flavor notes Sweet Citrus Orange and Honeydew",
                             Name = "Ethiopia Yirgacheffe",
                             Origin = "Ethiopia",
@@ -382,6 +389,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 4,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is an insanely smooth, balanced coffee, with notes of caramel apples, figs, and cashews throughout. It’s acidity is subtly citrusy, just like a clementine, and it’s sweetness is like strawberry candy.",
                             Name = "El Salvador El Manzano Honey",
                             Origin = "El Salvador",
@@ -415,7 +423,7 @@ namespace RateTheRoast.Data.Migrations
                         {
                             FavoriteId = 1,
                             CoffeeId = 4,
-                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
+                            UserId = "9ba8a144-4ee3-4691-97f2-9bb81cf91e39"
                         });
                 });
 
@@ -524,7 +532,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!",
                             Price = 12.99,
                             Score = 9,
-                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
+                            UserId = "9ba8a144-4ee3-4691-97f2-9bb81cf91e39"
                         },
                         new
                         {
@@ -536,7 +544,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                             Price = 15.99,
                             Score = 9,
-                            UserId = "16fe5d33-9d65-4b41-8bdb-9136257a7f0e"
+                            UserId = "9ba8a144-4ee3-4691-97f2-9bb81cf91e39"
                         });
                 });
 
@@ -614,7 +622,7 @@ namespace RateTheRoast.Data.Migrations
                             City = "Nashville",
                             Name = "Bongo Java",
                             State = "TN",
-                            UserId = "036754c8-e814-4296-b239-4e08cf89d905"
+                            UserId = "8f241ddf-8b31-47f1-9f15-214df6c2ef57"
                         },
                         new
                         {
