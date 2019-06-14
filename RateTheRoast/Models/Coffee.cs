@@ -42,6 +42,8 @@ namespace RateTheRoast.Models
 
         public ICollection<Favorite> Favorites { get; set; }
 
+        public ICollection<Wishlist> Wishlists { get; set; }
+
     }
 }
 

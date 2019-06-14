@@ -320,6 +320,14 @@ namespace RateTheRoast.Data
                     UserId = user2.Id,
                     CoffeeId = 4
                 });
+
+            modelBuilder.Entity<Wishlist>().HasData(
+                new Wishlist()
+                {
+                    WishlistId = 1,
+                    UserId = user2.Id,
+                    CoffeeId = 2
+                });
         }
 
         public DbSet<RateTheRoast.Models.Favorite> Favorite { get; set; }
