@@ -20,7 +20,8 @@ namespace RateTheRoast.Models
         public string City { get; set; }
 
         [Required]
-        public string State { get; set; }
+        public int USAstateId { get; set; }
+        public USAstate USAstate { get; set; }
 
         [Display(Name = "Roaster Logo")]
         public string ImagePath { get; set; }

@@ -55,7 +55,7 @@ namespace RateTheRoast.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "State")]
-            public string State { get; set; }
+            public int USAStateId { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -86,8 +86,7 @@ namespace RateTheRoast.Areas.Identity.Pages.Account
                     UserName = Input.Email,
                     Email = Input.Email,
                     City = Input.City,
-                    State = Input.State,
-                    IsAdministrator = false
+                    USAstateId = Input.USAStateId
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
