@@ -16,7 +16,7 @@ namespace RateTheRoast.Data
         public DbSet<RoastIntensity> RoastIntensity { get; set; }
         public DbSet<BrewMethod> BrewMethod { get; set; }
         public DbSet<Location> Location { get; set; }
-        public DbSet<USAstate> USAstate { get; set; }
+        public DbSet<State> State { get; set; }
         public DbSet<Roaster> Roaster { get; set; }
         public DbSet<Coffee> Coffee { get; set; }
         public DbSet<Review> Review { get; set; }
@@ -47,7 +47,7 @@ namespace RateTheRoast.Data
                 Handle = "admin",
                 NormalizedHandle = "ADMIN",
                 City = "Nashville",
-                USAstateId = 42
+                StateAbbrev = "TN"
             };
             var passwordHash = new PasswordHasher<ApplicationUser>();
             user.PasswordHash = passwordHash.HashPassword(user, "P@ssword99");
@@ -65,7 +65,7 @@ namespace RateTheRoast.Data
                 Handle = "BarnyardBarista",
                 NormalizedHandle = "BARNYARDBARISTA",
                 City = "Chattanooga",
-                USAstateId = 42
+                StateAbbrev = "TN"
             };
             passwordHash = new PasswordHasher<ApplicationUser>();
             user2.PasswordHash = passwordHash.HashPassword(user2, "P@ssword99");
@@ -83,7 +83,7 @@ namespace RateTheRoast.Data
                 Handle = "BongoJava",
                 NormalizedHandle = "BONGOJAVA",
                 City = "Nashville",
-                USAstateId = 42
+                StateAbbrev = "TN"
             };
             passwordHash = new PasswordHasher<ApplicationUser>();
             user3.PasswordHash = passwordHash.HashPassword(user3, "P@ssword99");
@@ -167,7 +167,7 @@ namespace RateTheRoast.Data
                     Name = "The Turnip Truck",
                     Address = "701 Woodland St",
                     City = "Nashville",
-                    USAstateId = 42
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -175,7 +175,7 @@ namespace RateTheRoast.Data
                     Name = "Bongo East",
                     Address = "107 S 11th St",
                     City = "Nashville",
-                    USAstateId = 42
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -183,7 +183,7 @@ namespace RateTheRoast.Data
                     Name = "Revelator Coffee Company",
                     Address = "1817 21st Ave S",
                     City = "Nashville",
-                    USAstateId = 42
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -191,7 +191,7 @@ namespace RateTheRoast.Data
                     Name = "Kroger",
                     Address = "711 Gallatin Ave",
                     City = "Nashville",
-                    USAstateId = 42
+                    StateAbbrev = "TN"
                 });
 
             modelBuilder.Entity<Roaster>().HasData(
@@ -201,7 +201,7 @@ namespace RateTheRoast.Data
                     UserId = user3.Id,
                     Name = "Bongo Java",
                     City = "Nashville",
-                    USAstateId = 42,
+                    StateAbbrev = "TN",
                     ImagePath = null
                 },
                 new Roaster()
@@ -210,7 +210,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Revelator Coffee Company",
                     City = "Birmingham",
-                    USAstateId = 1,
+                    StateAbbrev = "AL",
                     ImagePath = null
                 },
                 new Roaster()
@@ -219,7 +219,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Folgers",
                     City = "New Orleans",
-                    USAstateId = 18,
+                    StateAbbrev = "LA",
                     ImagePath = null
                 },
                 new Roaster()
@@ -228,7 +228,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Intelligentsia",
                     City = "Chicago",
-                    USAstateId = 13,
+                    StateAbbrev = "IL",
                     ImagePath = null
                 },
                 new Roaster()
@@ -237,7 +237,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Frothy Monkey",
                     City = "Nashville",
-                    USAstateId = 42,
+                    StateAbbrev = "TN",
                     ImagePath = null
                 });
 
@@ -329,306 +329,256 @@ namespace RateTheRoast.Data
                     CoffeeId = 2
                 });
 
-            modelBuilder.Entity<USAstate>().HasData(
-                new USAstate()
+            modelBuilder.Entity<State>().HasData(
+                new State()
                 {
-                    USAstateId = 1,
-                    USAstateName = "Alabama",
-                    USAstateAbbrev = "AL"
+                    StateName = "Alabama",
+                    StateAbbrev = "AL"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 2,
-                    USAstateName = "Alaska",
-                    USAstateAbbrev = "AK"
+                    StateName = "Alaska",
+                    StateAbbrev = "AK"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 3,
-                    USAstateName = "Arizona",
-                    USAstateAbbrev = "AZ"
+                    StateName = "Arizona",
+                    StateAbbrev = "AZ"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 4,
-                    USAstateName = "Arkansas",
-                    USAstateAbbrev = "AK"
+                    StateName = "Arkansas",
+                    StateAbbrev = "AK"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 5,
-                    USAstateName = "California",
-                    USAstateAbbrev = "CA"
+                    StateName = "California",
+                    StateAbbrev = "CA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 6,
-                    USAstateName = "Colorado",
-                    USAstateAbbrev = "CO"
+                    StateName = "Colorado",
+                    StateAbbrev = "CO"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 7,
-                    USAstateName = "Connecticut",
-                    USAstateAbbrev = "CT"
+                    StateName = "Connecticut",
+                    StateAbbrev = "CT"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 8,
-                    USAstateName = "Delaware",
-                    USAstateAbbrev = "DE"
+                    StateName = "Delaware",
+                    StateAbbrev = "DE"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 9,
-                    USAstateName = "Florida",
-                    USAstateAbbrev = "FL"
+                    StateName = "Florida",
+                    StateAbbrev = "FL"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 10,
-                    USAstateName = "Georgia",
-                    USAstateAbbrev = "GA"
+                    StateName = "Georgia",
+                    StateAbbrev = "GA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 11,
-                    USAstateName = "Hawaii",
-                    USAstateAbbrev = "HI"
+                    StateName = "Hawaii",
+                    StateAbbrev = "HI"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 12,
-                    USAstateName = "Idaho",
-                    USAstateAbbrev = "ID"
+                    StateName = "Idaho",
+                    StateAbbrev = "ID"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 13,
-                    USAstateName = "Illinois",
-                    USAstateAbbrev = "IL"
+                    StateName = "Illinois",
+                    StateAbbrev = "IL"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 14,
-                    USAstateName = "Indiana",
-                    USAstateAbbrev = "IN"
+                    StateName = "Indiana",
+                    StateAbbrev = "IN"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 15,
-                    USAstateName = "Iowa",
-                    USAstateAbbrev = "IA"
+                    StateName = "Iowa",
+                    StateAbbrev = "IA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 16,
-                    USAstateName = "Kansas",
-                    USAstateAbbrev = "KS"
+                    StateName = "Kansas",
+                    StateAbbrev = "KS"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 17,
-                    USAstateName = "Kentucky",
-                    USAstateAbbrev = "KY"
+                    StateName = "Kentucky",
+                    StateAbbrev = "KY"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 18,
-                    USAstateName = "Louisiana",
-                    USAstateAbbrev = "LA"
+                    StateName = "Louisiana",
+                    StateAbbrev = "LA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 19,
-                    USAstateName = "Maine",
-                    USAstateAbbrev = "ME"
+                    StateName = "Maine",
+                    StateAbbrev = "ME"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 20,
-                    USAstateName = "Maryland",
-                    USAstateAbbrev = "MD"
+                    StateName = "Maryland",
+                    StateAbbrev = "MD"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 21,
-                    USAstateName = "Massachusetts",
-                    USAstateAbbrev = "MA"
+                    StateName = "Massachusetts",
+                    StateAbbrev = "MA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 22,
-                    USAstateName = "Michigan",
-                    USAstateAbbrev = "MI"
+                    StateName = "Michigan",
+                    StateAbbrev = "MI"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 23,
-                    USAstateName = "Minnesota",
-                    USAstateAbbrev = "MN"
+                    StateName = "Minnesota",
+                    StateAbbrev = "MN"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 24,
-                    USAstateName = "Mississippi",
-                    USAstateAbbrev = "MS"
+                    StateName = "Mississippi",
+                    StateAbbrev = "MS"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 25,
-                    USAstateName = "Missouri",
-                    USAstateAbbrev = "MO"
+                    StateName = "Missouri",
+                    StateAbbrev = "MO"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 26,
-                    USAstateName = "Montana",
-                    USAstateAbbrev = "MT"
+                    StateName = "Montana",
+                    StateAbbrev = "MT"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 27,
-                    USAstateName = "Nebraska",
-                    USAstateAbbrev = "NE"
+                    StateName = "Nebraska",
+                    StateAbbrev = "NE"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 28,
-                    USAstateName = "Nevada",
-                    USAstateAbbrev = "NV"
+                    StateName = "Nevada",
+                    StateAbbrev = "NV"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 29,
-                    USAstateName = "New Hampshire",
-                    USAstateAbbrev = "NH"
+                    StateName = "New Hampshire",
+                    StateAbbrev = "NH"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 30,
-                    USAstateName = "New Jersey",
-                    USAstateAbbrev = "NJ"
+                    StateName = "New Jersey",
+                    StateAbbrev = "NJ"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 31,
-                    USAstateName = "New Mexico",
-                    USAstateAbbrev = "NM"
+                    StateName = "New Mexico",
+                    StateAbbrev = "NM"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 32,
-                    USAstateName = "New York",
-                    USAstateAbbrev = "NY"
+                    StateName = "New York",
+                    StateAbbrev = "NY"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 33,
-                    USAstateName = "North Carolina",
-                    USAstateAbbrev = "NC"
+                    StateName = "North Carolina",
+                    StateAbbrev = "NC"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 34,
-                    USAstateName = "North Dakota",
-                    USAstateAbbrev = "ND"
+                    StateName = "North Dakota",
+                    StateAbbrev = "ND"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 35,
-                    USAstateName = "Ohio",
-                    USAstateAbbrev = "OH"
+                    StateName = "Ohio",
+                    StateAbbrev = "OH"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 36,
-                    USAstateName = "Oklahoma",
-                    USAstateAbbrev = "OK"
+                    StateName = "Oklahoma",
+                    StateAbbrev = "OK"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 37,
-                    USAstateName = "Oregon",
-                    USAstateAbbrev = "OR"
+                    StateName = "Oregon",
+                    StateAbbrev = "OR"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 38,
-                    USAstateName = "Pennsylvania",
-                    USAstateAbbrev = "PA"
+                    StateName = "Pennsylvania",
+                    StateAbbrev = "PA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 39,
-                    USAstateName = "Rhode Island",
-                    USAstateAbbrev = "RI"
+                    StateName = "Rhode Island",
+                    StateAbbrev = "RI"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 40,
-                    USAstateName = "South Carolina",
-                    USAstateAbbrev = "SC"
+                    StateName = "South Carolina",
+                    StateAbbrev = "SC"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 41,
-                    USAstateName = "South Dakota",
-                    USAstateAbbrev = "SD"
+                    StateName = "South Dakota",
+                    StateAbbrev = "SD"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 42,
-                    USAstateName = "Tennessee",
-                    USAstateAbbrev = "TN"
+                    StateName = "Tennessee",
+                    StateAbbrev = "TN"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 43,
-                    USAstateName = "Texas",
-                    USAstateAbbrev = "TX"
+                    StateName = "Texas",
+                    StateAbbrev = "TX"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 44,
-                    USAstateName = "Utah",
-                    USAstateAbbrev = "UT"
+                    StateName = "Utah",
+                    StateAbbrev = "UT"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 45,
-                    USAstateName = "Vermont",
-                    USAstateAbbrev = "VT"
+                    StateName = "Vermont",
+                    StateAbbrev = "VT"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 46,
-                    USAstateName = "Virgina",
-                    USAstateAbbrev = "VA"
+                    StateName = "Virgina",
+                    StateAbbrev = "VA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 47,
-                    USAstateName = "Washington",
-                    USAstateAbbrev = "WA"
+                    StateName = "Washington",
+                    StateAbbrev = "WA"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 48,
-                    USAstateName = "West Virginia",
-                    USAstateAbbrev = "WV"
+                    StateName = "West Virginia",
+                    StateAbbrev = "WV"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 49,
-                    USAstateName = "Wisconsin",
-                    USAstateAbbrev = "WI"
+                    StateName = "Wisconsin",
+                    StateAbbrev = "WI"
                 },
-                new USAstate()
+                new State()
                 {
-                    USAstateId = 50,
-                    USAstateName = "Wyoming",
-                    USAstateAbbrev = "WY"
+                    StateName = "Wyoming",
+                    StateAbbrev = "WY"
                 }
                 );
         }
