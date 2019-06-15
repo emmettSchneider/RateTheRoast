@@ -8,6 +8,7 @@ namespace RateTheRoast.Models
 {
     public class Location
     {
+        [Key]
         public int LocationId { get; set; }
 
         [Required]
