@@ -11,12 +11,12 @@ namespace RateTheRoast.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        
         public DbSet<RoastIntensity> RoastIntensity { get; set; }
         public DbSet<BrewMethod> BrewMethod { get; set; }
-        public DbSet<Location> Location { get; set; }
         public DbSet<State> State { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Location> Location { get; set; }
         public DbSet<Roaster> Roaster { get; set; }
         public DbSet<Coffee> Coffee { get; set; }
         public DbSet<Review> Review { get; set; }
@@ -125,7 +125,7 @@ namespace RateTheRoast.Data
                 new State()
                 {
                     StateName = "Arkansas",
-                    StateAbbrev = "AK"
+                    StateAbbrev = "AR"
                 },
                 new State()
                 {

@@ -20,12 +20,6 @@ namespace RateTheRoast.Data.Migrations
                 nullable: false,
                 defaultValue: "");
 
-            migrationBuilder.AddColumn<bool>(
-                name: "IsAdministrator",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: false);
-
             migrationBuilder.AddColumn<string>(
                 name: "NormalizedHandle",
                 table: "AspNetUsers",
@@ -33,7 +27,7 @@ namespace RateTheRoast.Data.Migrations
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "State",
+                name: "StateAbbrev",
                 table: "AspNetUsers",
                 nullable: false,
                 defaultValue: "");
@@ -52,19 +46,57 @@ namespace RateTheRoast.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RoastIntensity",
+                columns: table => new
+                {
+                    RoastIntensityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Intensity = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoastIntensity", x => x.RoastIntensityId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "State",
+                columns: table => new
+                {
+                    StateAbbrev = table.Column<string>(nullable: false),
+                    StateName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_State", x => x.StateAbbrev);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
                     LocationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    StateAbbrev = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Location", x => x.LocationId);
+                    table.ForeignKey(
+                        name: "FK_Location_State_StateAbbrev",
+                        column: x => x.StateAbbrev,
+                        principalTable: "State",
+                        principalColumn: "StateAbbrev",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Location_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,31 +108,24 @@ namespace RateTheRoast.Data.Migrations
                     UserId = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
-                    State = table.Column<string>(nullable: false),
+                    StateAbbrev = table.Column<string>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roaster", x => x.RoasterId);
                     table.ForeignKey(
+                        name: "FK_Roaster_State_StateAbbrev",
+                        column: x => x.StateAbbrev,
+                        principalTable: "State",
+                        principalColumn: "StateAbbrev",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Roaster_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoastIntensity",
-                columns: table => new
-                {
-                    RoastIntensityId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Intensity = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoastIntensity", x => x.RoastIntensityId);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,16 +258,6 @@ namespace RateTheRoast.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Handle", "IsAdministrator", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedHandle", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "State", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "cdc419b1-37e9-449b-b867-a0606c708a4f", 0, "Nashville", "5a631d65-c360-4eb8-b69a-acb046c98793", "admin@admin.com", true, "admin", true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEF/ghVQcKIO4Yxs2UoiLGOEk/qJXKME3cCMfeeEKuVnFlSocFhHY2s4zviUkraCXfw==", null, false, "e1a95846-7c80-42b6-b786-f03061ea8ff4", "TN", false, "admin@admin.com" },
-                    { "6e64d6bb-c1bb-4690-9943-34b48887960d", 0, "Chattanooga", "ad4b5b7b-80e7-4352-8c3d-f1d219193505", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEOVUlyEhdBy3KicxCtYiDZP5fJyMjj1gv+JEUgPNzzm6mmyEswSJfvsUK1NIt1A0Mg==", null, false, "6d95f76f-b57c-4389-9df0-ffba730cdee1", "TN", false, "barnyardbarista@hotmail.com" },
-                    { "fdaf41bd-4c65-4bd9-8aa8-acadc5d80b82", 0, "Nashville", "8422161f-4834-47a0-aa66-63ed8f2630c0", "info@bongojava.com", true, "BongoJava", false, false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEGXI6qyTzvHm+4SlUp5sPBdbKPmIANiH08lCHg5s/U4lNYeZ41uYdm4wcDINzVAB/A==", null, false, "d13645ba-86cd-4497-b788-763016abbfe0", "TN", false, "info@bongojava.com" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "BrewMethod",
                 columns: new[] { "BrewMethodId", "Method" },
                 values: new object[,]
@@ -258,35 +273,102 @@ namespace RateTheRoast.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Location",
-                columns: new[] { "LocationId", "Address", "City", "Name", "State" },
-                values: new object[,]
-                {
-                    { 4, "711 Gallatin Ave", "Nashville", "Kroger", "TN" },
-                    { 3, "1817 21st Ave S", "Nashville", "Revelator Coffee Company", "TN" },
-                    { 1, "701 Woodland St", "Nashville", "The Turnip Truck", "TN" },
-                    { 2, "107 S 11th St", "Nashville", "Bongo East", "TN" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "RoastIntensity",
                 columns: new[] { "RoastIntensityId", "Intensity" },
                 values: new object[,]
                 {
-                    { 1, "Light" },
-                    { 2, "Medium-Light" },
+                    { 5, "Dark" },
                     { 3, "Medium" },
                     { 4, "Medium-Dark" },
-                    { 5, "Dark" }
+                    { 1, "Light" },
+                    { 2, "Medium-Light" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "State",
+                columns: new[] { "StateAbbrev", "StateName" },
+                values: new object[,]
+                {
+                    { "OK", "Oklahoma" },
+                    { "NE", "Nebraska" },
+                    { "NV", "Nevada" },
+                    { "NH", "New Hampshire" },
+                    { "NJ", "New Jersey" },
+                    { "NM", "New Mexico" },
+                    { "NY", "New York" },
+                    { "NC", "North Carolina" },
+                    { "ND", "North Dakota" },
+                    { "OH", "Ohio" },
+                    { "OR", "Oregon" },
+                    { "TX", "Texas" },
+                    { "RI", "Rhode Island" },
+                    { "SC", "South Carolina" },
+                    { "SD", "South Dakota" },
+                    { "TN", "Tennessee" },
+                    { "MT", "Montana" },
+                    { "UT", "Utah" },
+                    { "VT", "Vermont" },
+                    { "VA", "Virgina" },
+                    { "WA", "Washington" },
+                    { "WV", "West Virginia" },
+                    { "PA", "Pennsylvania" },
+                    { "MO", "Missouri" },
+                    { "ME", "Maine" },
+                    { "MN", "Minnesota" },
+                    { "AL", "Alabama" },
+                    { "AK", "Alaska" },
+                    { "AZ", "Arizona" },
+                    { "AR", "Arkansas" },
+                    { "CA", "California" },
+                    { "CO", "Colorado" },
+                    { "CT", "Connecticut" },
+                    { "DE", "Delaware" },
+                    { "FL", "Florida" },
+                    { "GA", "Georgia" },
+                    { "MS", "Mississippi" },
+                    { "HI", "Hawaii" },
+                    { "IL", "Illinois" },
+                    { "IN", "Indiana" },
+                    { "IA", "Iowa" },
+                    { "KS", "Kansas" },
+                    { "KY", "Kentucky" },
+                    { "LA", "Louisiana" },
+                    { "WI", "Wisconsin" },
+                    { "MD", "Maryland" },
+                    { "MA", "Massachusetts" },
+                    { "MI", "Michigan" },
+                    { "ID", "Idaho" },
+                    { "WY", "Wyoming" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Handle", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedHandle", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StateAbbrev", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "7b8048d1-0dff-40cf-a224-330ef41afaed", 0, "Nashville", "17e90bda-9941-4d18-bfe2-7b1943cf9fe1", "admin@admin.com", true, "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEMgSioN/OysF0/ntr7uaaRTr4J9qXs4az5sW6sRzDYNNigE1ixMni6EWK0Wt9wb8cw==", null, false, "fe90d5d0-7e82-4c04-8deb-515511ddd378", "TN", false, "admin@admin.com" },
+                    { "8ac655d6-99ba-4347-98fd-e708a6241baf", 0, "Chattanooga", "5dcbb4fa-592f-42d7-a56f-0a9c9b4a87cf", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEDzcjYnk2f74Mvbj5luJFvSAdKnYAWGjN7PKCRN7L+2QASUCy9/7hCie1uzhHkbf+A==", null, false, "e7cc185c-b4f5-4e79-aa1e-f23ba67f09a6", "TN", false, "barnyardbarista@hotmail.com" },
+                    { "5fbfedaf-d823-4ad7-8106-7d92863d7692", 0, "Nashville", "2047d46f-9c97-49ce-8222-d2726b90716a", "info@bongojava.com", true, "BongoJava", false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEIWMVnGHkN73F76BaQa9NTVcaJHbQ44gqgI3nPDS3QoOa0Yj1p4+gmOUKnef6O6ypQ==", null, false, "03304db6-e0f4-42ce-bc86-984d80a0406e", "TN", false, "info@bongojava.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "LocationId", "Address", "City", "Name", "StateAbbrev", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "701 Woodland St", "Nashville", "The Turnip Truck", "TN", null },
+                    { 2, "107 S 11th St", "Nashville", "Bongo East", "TN", null },
+                    { 3, "1817 21st Ave S", "Nashville", "Revelator Coffee Company", "TN", null },
+                    { 4, "711 Gallatin Ave", "Nashville", "Kroger", "TN", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Roaster",
-                columns: new[] { "RoasterId", "City", "ImagePath", "Name", "State", "UserId" },
+                columns: new[] { "RoasterId", "City", "ImagePath", "Name", "StateAbbrev", "UserId" },
                 values: new object[,]
                 {
-                    { 4, "Chicago", null, "Intelligentsia", "IL", null },
                     { 2, "Birmingham", null, "Revelator Coffee Company", "AL", null },
+                    { 4, "Chicago", null, "Intelligentsia", "IL", null },
                     { 3, "New Orleans", null, "Folgers", "LA", null },
                     { 5, "Nashville", null, "Frothy Monkey", "TN", null }
                 });
@@ -303,8 +385,8 @@ namespace RateTheRoast.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Roaster",
-                columns: new[] { "RoasterId", "City", "ImagePath", "Name", "State", "UserId" },
-                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "fdaf41bd-4c65-4bd9-8aa8-acadc5d80b82" });
+                columns: new[] { "RoasterId", "City", "ImagePath", "Name", "StateAbbrev", "UserId" },
+                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "5fbfedaf-d823-4ad7-8106-7d92863d7692" });
 
             migrationBuilder.InsertData(
                 table: "Coffee",
@@ -319,22 +401,27 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Favorite",
                 columns: new[] { "FavoriteId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 4, "6e64d6bb-c1bb-4690-9943-34b48887960d" });
+                values: new object[] { 1, 4, "8ac655d6-99ba-4347-98fd-e708a6241baf" });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 2, 6, 4, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "6e64d6bb-c1bb-4690-9943-34b48887960d" });
+                values: new object[] { 2, 6, 4, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "8ac655d6-99ba-4347-98fd-e708a6241baf" });
 
             migrationBuilder.InsertData(
                 table: "Wishlist",
                 columns: new[] { "WishlistId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 2, "6e64d6bb-c1bb-4690-9943-34b48887960d" });
+                values: new object[] { 1, 2, "8ac655d6-99ba-4347-98fd-e708a6241baf" });
 
             migrationBuilder.InsertData(
                 table: "Review",
                 columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 1, 6, 1, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "6e64d6bb-c1bb-4690-9943-34b48887960d" });
+                values: new object[] { 1, 6, 1, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "8ac655d6-99ba-4347-98fd-e708a6241baf" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_StateAbbrev",
+                table: "AspNetUsers",
+                column: "StateAbbrev");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Coffee_RoastIntensityId",
@@ -354,6 +441,16 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Favorite_UserId",
                 table: "Favorite",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Location_StateAbbrev",
+                table: "Location",
+                column: "StateAbbrev");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Location_UserId",
+                table: "Location",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -377,6 +474,11 @@ namespace RateTheRoast.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Roaster_StateAbbrev",
+                table: "Roaster",
+                column: "StateAbbrev");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Roaster_UserId",
                 table: "Roaster",
                 column: "UserId",
@@ -392,10 +494,22 @@ namespace RateTheRoast.Data.Migrations
                 name: "IX_Wishlist_UserId",
                 table: "Wishlist",
                 column: "UserId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUsers_State_StateAbbrev",
+                table: "AspNetUsers",
+                column: "StateAbbrev",
+                principalTable: "State",
+                principalColumn: "StateAbbrev",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_AspNetUsers_State_StateAbbrev",
+                table: "AspNetUsers");
+
             migrationBuilder.DropTable(
                 name: "Favorite");
 
@@ -420,20 +534,27 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.DropTable(
                 name: "Roaster");
 
-            migrationBuilder.DeleteData(
-                table: "AspNetUsers",
-                keyColumn: "Id",
-                keyValue: "6e64d6bb-c1bb-4690-9943-34b48887960d");
+            migrationBuilder.DropTable(
+                name: "State");
+
+            migrationBuilder.DropIndex(
+                name: "IX_AspNetUsers_StateAbbrev",
+                table: "AspNetUsers");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "cdc419b1-37e9-449b-b867-a0606c708a4f");
+                keyValue: "5fbfedaf-d823-4ad7-8106-7d92863d7692");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "fdaf41bd-4c65-4bd9-8aa8-acadc5d80b82");
+                keyValue: "7b8048d1-0dff-40cf-a224-330ef41afaed");
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumn: "Id",
+                keyValue: "8ac655d6-99ba-4347-98fd-e708a6241baf");
 
             migrationBuilder.DropColumn(
                 name: "City",
@@ -444,15 +565,11 @@ namespace RateTheRoast.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "IsAdministrator",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
                 name: "NormalizedHandle",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "State",
+                name: "StateAbbrev",
                 table: "AspNetUsers");
         }
     }
