@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace RateTheRoast.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        
+
         public DbSet<RoastIntensity> RoastIntensity { get; set; }
         public DbSet<BrewMethod> BrewMethod { get; set; }
         public DbSet<State> State { get; set; }
@@ -25,6 +26,14 @@ namespace RateTheRoast.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetForeignKeys())
+                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+
+            base.OnModelCreating(modelBuilder);
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Review>()
