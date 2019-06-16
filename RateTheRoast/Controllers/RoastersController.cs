@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
+using RateTheRoast.Models.RoasterViewModels;
 
 namespace RateTheRoast.Controllers
 {
@@ -24,6 +25,19 @@ namespace RateTheRoast.Controllers
         {
             var applicationDbContext = _context.Roaster.Include(r => r.State).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> RoastersByState(string id)
+        {
+            var roasters = _context.Roaster
+                .Include(r => r.State)
+                .Include(r => r.User)
+                .Where(r => r.StateAbbrev == id);
+            if (roasters == null)
+            {
+                return NotFound();
+            }
+            return View(await roasters.ToListAsync());
         }
 
         // GET: Roasters/Details/5
