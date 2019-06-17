@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,72 +13,36 @@ namespace RateTheRoast.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<RoastIntensity> RoastIntensity { get; set; }
         public DbSet<BrewMethod> BrewMethod { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<Roaster> Roaster { get; set; }
         public DbSet<Coffee> Coffee { get; set; }
         public DbSet<Review> Review { get; set; }
+        public DbSet<Favorite> Favorite { get; set; }
+        public DbSet<Wishlist> Wishlist { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetForeignKeys())
+                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+
+            base.OnModelCreating(modelBuilder);
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Review>()
                 .Property(b => b.DateCreated)
                 .HasDefaultValueSql("GETDATE()");
 
-            ApplicationUser user = new ApplicationUser
-            {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "admin@admin.com",
-                NormalizedEmail = "ADMIN@ADMIN.COM",
-                EmailConfirmed = true,
-                LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString("D"),
-                City = "Nashville",
-                State = "TN",
-                IsAdministrator = true
-            };
-            var passwordHash = new PasswordHasher<ApplicationUser>();
-            user.PasswordHash = passwordHash.HashPassword(user, "P@ssword99");
-            modelBuilder.Entity<ApplicationUser>().HasData(user);
-
-            ApplicationUser user2 = new ApplicationUser
-            {
-                UserName = "BarnyardBarista",
-                NormalizedUserName = "BARNYARDBARISTA",
-                Email = "barnyardbarista@hotmail.com",
-                NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
-                EmailConfirmed = true,
-                LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString("D"),
-                City = "Chattanooga",
-                State = "TN",
-                IsAdministrator = false
-            };
-            passwordHash = new PasswordHasher<ApplicationUser>();
-            user2.PasswordHash = passwordHash.HashPassword(user2, "P@ssword99");
-            modelBuilder.Entity<ApplicationUser>().HasData(user2);
-
-            ApplicationUser user3 = new ApplicationUser
-            {
-                UserName = "BongoJava",
-                NormalizedUserName = "BONGOJAVA",
-                Email = "info@bongojava.com",
-                NormalizedEmail = "INFO@BONGOJAVA.COM",
-                EmailConfirmed = true,
-                LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString("D"),
-                City = "Nashville",
-                State = "TN",
-                IsAdministrator = false
-            };
-            passwordHash = new PasswordHasher<ApplicationUser>();
-            user3.PasswordHash = passwordHash.HashPassword(user3, "P@ssword99");
-            modelBuilder.Entity<ApplicationUser>().HasData(user3);
+            modelBuilder.Entity<Coffee>()
+                .Property(c => c.DateAdded)
+                .HasDefaultValueSql("GETDATE()");
 
             modelBuilder.Entity<RoastIntensity>().HasData(
                 new RoastIntensity()
@@ -150,6 +115,259 @@ namespace RateTheRoast.Data
                     Method = "Vacuum pot / Siphon"
                 });
 
+            modelBuilder.Entity<State>().HasData(
+                new State()
+                {
+                    StateName = "Alabama",
+                    StateAbbrev = "AL"
+                },
+                new State()
+                {
+                    StateName = "Alaska",
+                    StateAbbrev = "AK"
+                },
+                new State()
+                {
+                    StateName = "Arizona",
+                    StateAbbrev = "AZ"
+                },
+                new State()
+                {
+                    StateName = "Arkansas",
+                    StateAbbrev = "AR"
+                },
+                new State()
+                {
+                    StateName = "California",
+                    StateAbbrev = "CA"
+                },
+                new State()
+                {
+                    StateName = "Colorado",
+                    StateAbbrev = "CO"
+                },
+                new State()
+                {
+                    StateName = "Connecticut",
+                    StateAbbrev = "CT"
+                },
+                new State()
+                {
+                    StateName = "Delaware",
+                    StateAbbrev = "DE"
+                },
+                new State()
+                {
+                    StateName = "Florida",
+                    StateAbbrev = "FL"
+                },
+                new State()
+                {
+                    StateName = "Georgia",
+                    StateAbbrev = "GA"
+                },
+                new State()
+                {
+                    StateName = "Hawaii",
+                    StateAbbrev = "HI"
+                },
+                new State()
+                {
+                    StateName = "Idaho",
+                    StateAbbrev = "ID"
+                },
+                new State()
+                {
+                    StateName = "Illinois",
+                    StateAbbrev = "IL"
+                },
+                new State()
+                {
+                    StateName = "Indiana",
+                    StateAbbrev = "IN"
+                },
+                new State()
+                {
+                    StateName = "Iowa",
+                    StateAbbrev = "IA"
+                },
+                new State()
+                {
+                    StateName = "Kansas",
+                    StateAbbrev = "KS"
+                },
+                new State()
+                {
+                    StateName = "Kentucky",
+                    StateAbbrev = "KY"
+                },
+                new State()
+                {
+                    StateName = "Louisiana",
+                    StateAbbrev = "LA"
+                },
+                new State()
+                {
+                    StateName = "Maine",
+                    StateAbbrev = "ME"
+                },
+                new State()
+                {
+                    StateName = "Maryland",
+                    StateAbbrev = "MD"
+                },
+                new State()
+                {
+                    StateName = "Massachusetts",
+                    StateAbbrev = "MA"
+                },
+                new State()
+                {
+                    StateName = "Michigan",
+                    StateAbbrev = "MI"
+                },
+                new State()
+                {
+                    StateName = "Minnesota",
+                    StateAbbrev = "MN"
+                },
+                new State()
+                {
+                    StateName = "Mississippi",
+                    StateAbbrev = "MS"
+                },
+                new State()
+                {
+                    StateName = "Missouri",
+                    StateAbbrev = "MO"
+                },
+                new State()
+                {
+                    StateName = "Montana",
+                    StateAbbrev = "MT"
+                },
+                new State()
+                {
+                    StateName = "Nebraska",
+                    StateAbbrev = "NE"
+                },
+                new State()
+                {
+                    StateName = "Nevada",
+                    StateAbbrev = "NV"
+                },
+                new State()
+                {
+                    StateName = "New Hampshire",
+                    StateAbbrev = "NH"
+                },
+                new State()
+                {
+                    StateName = "New Jersey",
+                    StateAbbrev = "NJ"
+                },
+                new State()
+                {
+                    StateName = "New Mexico",
+                    StateAbbrev = "NM"
+                },
+                new State()
+                {
+                    StateName = "New York",
+                    StateAbbrev = "NY"
+                },
+                new State()
+                {
+                    StateName = "North Carolina",
+                    StateAbbrev = "NC"
+                },
+                new State()
+                {
+                    StateName = "North Dakota",
+                    StateAbbrev = "ND"
+                },
+                new State()
+                {
+                    StateName = "Ohio",
+                    StateAbbrev = "OH"
+                },
+                new State()
+                {
+                    StateName = "Oklahoma",
+                    StateAbbrev = "OK"
+                },
+                new State()
+                {
+                    StateName = "Oregon",
+                    StateAbbrev = "OR"
+                },
+                new State()
+                {
+                    StateName = "Pennsylvania",
+                    StateAbbrev = "PA"
+                },
+                new State()
+                {
+                    StateName = "Rhode Island",
+                    StateAbbrev = "RI"
+                },
+                new State()
+                {
+                    StateName = "South Carolina",
+                    StateAbbrev = "SC"
+                },
+                new State()
+                {
+                    StateName = "South Dakota",
+                    StateAbbrev = "SD"
+                },
+                new State()
+                {
+                    StateName = "Tennessee",
+                    StateAbbrev = "TN"
+                },
+                new State()
+                {
+                    StateName = "Texas",
+                    StateAbbrev = "TX"
+                },
+                new State()
+                {
+                    StateName = "Utah",
+                    StateAbbrev = "UT"
+                },
+                new State()
+                {
+                    StateName = "Vermont",
+                    StateAbbrev = "VT"
+                },
+                new State()
+                {
+                    StateName = "Virgina",
+                    StateAbbrev = "VA"
+                },
+                new State()
+                {
+                    StateName = "Washington",
+                    StateAbbrev = "WA"
+                },
+                new State()
+                {
+                    StateName = "West Virginia",
+                    StateAbbrev = "WV"
+                },
+                new State()
+                {
+                    StateName = "Wisconsin",
+                    StateAbbrev = "WI"
+                },
+                new State()
+                {
+                    StateName = "Wyoming",
+                    StateAbbrev = "WY"
+                }
+                );
+
             modelBuilder.Entity<Location>().HasData(
                 new Location()
                 {
@@ -157,7 +375,7 @@ namespace RateTheRoast.Data
                     Name = "The Turnip Truck",
                     Address = "701 Woodland St",
                     City = "Nashville",
-                    State = "TN"
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -165,7 +383,7 @@ namespace RateTheRoast.Data
                     Name = "Bongo East",
                     Address = "107 S 11th St",
                     City = "Nashville",
-                    State = "TN"
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -173,7 +391,7 @@ namespace RateTheRoast.Data
                     Name = "Revelator Coffee Company",
                     Address = "1817 21st Ave S",
                     City = "Nashville",
-                    State = "TN"
+                    StateAbbrev = "TN"
                 },
                 new Location()
                 {
@@ -181,8 +399,62 @@ namespace RateTheRoast.Data
                     Name = "Kroger",
                     Address = "711 Gallatin Ave",
                     City = "Nashville",
-                    State = "TN"
+                    StateAbbrev = "TN"
                 });
+
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "admin",
+                NormalizedHandle = "ADMIN",
+                City = "Nashville",
+                StateAbbrev = "TN"
+            };
+            var passwordHash = new PasswordHasher<ApplicationUser>();
+            user.PasswordHash = passwordHash.HashPassword(user, "P@ssword99");
+            modelBuilder.Entity<ApplicationUser>().HasData(user);
+
+            ApplicationUser user2 = new ApplicationUser
+            {
+                UserName = "barnyardbarista@hotmail.com",
+                NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
+                Email = "barnyardbarista@hotmail.com",
+                NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "BarnyardBarista",
+                NormalizedHandle = "BARNYARDBARISTA",
+                City = "Chattanooga",
+                StateAbbrev = "TN"
+            };
+            passwordHash = new PasswordHasher<ApplicationUser>();
+            user2.PasswordHash = passwordHash.HashPassword(user2, "P@ssword99");
+            modelBuilder.Entity<ApplicationUser>().HasData(user2);
+
+            ApplicationUser user3 = new ApplicationUser
+            {
+                UserName = "info@bongojava.com",
+                NormalizedUserName = "INFO@BONGOJAVA.COM",
+                Email = "info@bongojava.com",
+                NormalizedEmail = "INFO@BONGOJAVA.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
+                Handle = "BongoJava",
+                NormalizedHandle = "BONGOJAVA",
+                City = "Nashville",
+                StateAbbrev = "TN"
+            };
+            passwordHash = new PasswordHasher<ApplicationUser>();
+            user3.PasswordHash = passwordHash.HashPassword(user3, "P@ssword99");
+            modelBuilder.Entity<ApplicationUser>().HasData(user3);
 
             modelBuilder.Entity<Roaster>().HasData(
                 new Roaster()
@@ -191,7 +463,7 @@ namespace RateTheRoast.Data
                     UserId = user3.Id,
                     Name = "Bongo Java",
                     City = "Nashville",
-                    State = "TN",
+                    StateAbbrev = "TN",
                     ImagePath = null
                 },
                 new Roaster()
@@ -200,7 +472,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Revelator Coffee Company",
                     City = "Birmingham",
-                    State = "AL",
+                    StateAbbrev = "AL",
                     ImagePath = null
                 },
                 new Roaster()
@@ -209,7 +481,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Folgers",
                     City = "New Orleans",
-                    State = "LA",
+                    StateAbbrev = "LA",
                     ImagePath = null
                 },
                 new Roaster()
@@ -218,7 +490,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Intelligentsia",
                     City = "Chicago",
-                    State = "IL",
+                    StateAbbrev = "IL",
                     ImagePath = null
                 },
                 new Roaster()
@@ -227,7 +499,7 @@ namespace RateTheRoast.Data
                     UserId = null,
                     Name = "Frothy Monkey",
                     City = "Nashville",
-                    State = "TN",
+                    StateAbbrev = "TN",
                     ImagePath = null
                 });
 
@@ -309,6 +581,14 @@ namespace RateTheRoast.Data
                     FavoriteId = 1,
                     UserId = user2.Id,
                     CoffeeId = 4
+                });
+
+            modelBuilder.Entity<Wishlist>().HasData(
+                new Wishlist()
+                {
+                    WishlistId = 1,
+                    UserId = user2.Id,
+                    CoffeeId = 2
                 });
         }
     }

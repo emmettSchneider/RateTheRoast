@@ -151,7 +151,8 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<bool>("IsAdministrator");
+                    b.Property<string>("Handle")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -159,6 +160,9 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedHandle")
+                        .IsRequired();
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
@@ -171,7 +175,7 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("State")
+                    b.Property<string>("StateAbbrev")
                         .IsRequired();
 
                     b.Property<bool>("TwoFactorEnabled");
@@ -189,65 +193,70 @@ namespace RateTheRoast.Data.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("StateAbbrev");
+
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
                         new
                         {
-                            Id = "6235a0ba-95cc-4e41-83ad-ec28578b3b6f",
+                            Id = "a1dda947-98ff-4076-878d-84a0ecb20204",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "949a00d7-e441-49ac-b63f-0b001e9eb026",
+                            ConcurrencyStamp = "cdda9e8b-f2ac-4cfb-b3fd-acb04800eb58",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
-                            IsAdministrator = true,
+                            Handle = "admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKYHUvWxVTUvA4XBQrWDkqCyRsTz0C2a6zJ6UT2xH6uHlvVSUXB5KN1H8gC1bu69MA==",
+                            NormalizedHandle = "ADMIN",
+                            NormalizedUserName = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOCX/28AxDdBCRKt6xKw0lKh+EwmQBkrxaJKU0hSA1A0YPyz5MFImB2uzOmS/bcbgA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4567ac3d-d3e0-449b-9b1e-0bcd8d0aa1cf",
-                            State = "TN",
+                            SecurityStamp = "551b37d2-3fb3-46e5-a591-806144f69aca",
+                            StateAbbrev = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "admin@admin.com"
                         },
                         new
                         {
-                            Id = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b",
+                            Id = "1b518e91-a5fc-47cb-adfd-d946329b5970",
                             AccessFailedCount = 0,
                             City = "Chattanooga",
-                            ConcurrencyStamp = "34671055-9794-40d1-973c-cb5edf9d8caa",
+                            ConcurrencyStamp = "291975db-0ebf-4b68-9e31-2e53ddf297f0",
                             Email = "barnyardbarista@hotmail.com",
                             EmailConfirmed = true,
-                            IsAdministrator = false,
+                            Handle = "BarnyardBarista",
                             LockoutEnabled = false,
                             NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
-                            NormalizedUserName = "BARNYARDBARISTA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA9ZxkIc4c/2SzkJqkEIqZZE+TSKmLgkXg/GkkGTeAAcVn3uylvnpkcJIQDBvGLZYg==",
+                            NormalizedHandle = "BARNYARDBARISTA",
+                            NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEArErESFadjv6fS6ACZgLRlB98A9dtyZCGc2t+y6P0yB2QPUhZsaKUBoMiLTw4BJTw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fd699e60-3126-4390-b1ab-0e03726ad5c6",
-                            State = "TN",
+                            SecurityStamp = "e02d12d4-faa2-4061-bbd8-ee4994f9c755",
+                            StateAbbrev = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "BarnyardBarista"
+                            UserName = "barnyardbarista@hotmail.com"
                         },
                         new
                         {
-                            Id = "9692dd2b-b06b-48e2-a43c-dd8c77ae2814",
+                            Id = "7d91e35e-00f0-4698-a8bd-e4ef13efff4c",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "2f734933-5561-4c9d-804a-973a7f2d97a1",
+                            ConcurrencyStamp = "86e58efd-212f-4692-8e53-986c4a507f6d",
                             Email = "info@bongojava.com",
                             EmailConfirmed = true,
-                            IsAdministrator = false,
+                            Handle = "BongoJava",
                             LockoutEnabled = false,
                             NormalizedEmail = "INFO@BONGOJAVA.COM",
-                            NormalizedUserName = "BONGOJAVA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK7hhTbIkTrO/PQZuchyoGulVX8mmdV+fZbef9/6+khBPwFMKILaNhAx6mS8cCrvnA==",
+                            NormalizedHandle = "BONGOJAVA",
+                            NormalizedUserName = "INFO@BONGOJAVA.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIPoSE0Uv0FQ6Xo9n6u0ALpgEyxjXjNBEkJyKWxZWAFVT1CcIXJXboYpjEUcOasUZg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "235aca19-7d28-4ce0-b615-0c72864da69a",
-                            State = "TN",
+                            SecurityStamp = "d058a8c6-cab7-4188-ac47-a833a219f403",
+                            StateAbbrev = "TN",
                             TwoFactorEnabled = false,
-                            UserName = "BongoJava"
+                            UserName = "info@bongojava.com"
                         });
                 });
 
@@ -312,6 +321,10 @@ namespace RateTheRoast.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateAdded")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GETDATE()");
+
                     b.Property<string>("Description")
                         .IsRequired();
 
@@ -341,6 +354,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 1,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A nod to our hometown, lovingly referred to as the Buckle of the Bible Belt. Flavor notes of Brown Sugar, Cocoa, and Baked Pear",
                             Name = "Bible Belt",
                             Origin = "Blend",
@@ -350,6 +364,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 2,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "SOTARÁ EDITION | After four lots from Nariño, our Tres Santos tour of Colombia's most exciting growing regions takes us to Cauca, where we have been working since 2016 with a group of 80 smallholder farmers committed to quality. We blended the four best single-farm lots of the bunch for this Tres Santos offering, which comes from the farms of Hover Guevara, Eudaro Garzón, José Chicangana, and Ramón Manzano. Flavor Notes: Apple, Caramel, Baked Lemon",
                             Name = "Colombia Tres Santos",
                             Origin = "Colombia",
@@ -360,6 +375,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 3,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ethiopia is where coffee was discovered and these are some of the best organic beans this country has to offer. A floral cup with delicate sweet lemon acidity, strong aroma of bergamont and jasmine flowers. Flavor notes Sweet Citrus Orange and Honeydew",
                             Name = "Ethiopia Yirgacheffe",
                             Origin = "Ethiopia",
@@ -370,6 +386,7 @@ namespace RateTheRoast.Data.Migrations
                         new
                         {
                             CoffeeId = 4,
+                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "This is an insanely smooth, balanced coffee, with notes of caramel apples, figs, and cashews throughout. It’s acidity is subtly citrusy, just like a clementine, and it’s sweetness is like strawberry candy.",
                             Name = "El Salvador El Manzano Honey",
                             Origin = "El Salvador",
@@ -403,7 +420,7 @@ namespace RateTheRoast.Data.Migrations
                         {
                             FavoriteId = 1,
                             CoffeeId = 4,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "1b518e91-a5fc-47cb-adfd-d946329b5970"
                         });
                 });
 
@@ -413,15 +430,25 @@ namespace RateTheRoast.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Address")
+                        .IsRequired();
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("State");
+                    b.Property<string>("StateAbbrev")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
 
                     b.HasKey("LocationId");
+
+                    b.HasIndex("StateAbbrev");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Location");
 
@@ -432,7 +459,7 @@ namespace RateTheRoast.Data.Migrations
                             Address = "701 Woodland St",
                             City = "Nashville",
                             Name = "The Turnip Truck",
-                            State = "TN"
+                            StateAbbrev = "TN"
                         },
                         new
                         {
@@ -440,7 +467,7 @@ namespace RateTheRoast.Data.Migrations
                             Address = "107 S 11th St",
                             City = "Nashville",
                             Name = "Bongo East",
-                            State = "TN"
+                            StateAbbrev = "TN"
                         },
                         new
                         {
@@ -448,7 +475,7 @@ namespace RateTheRoast.Data.Migrations
                             Address = "1817 21st Ave S",
                             City = "Nashville",
                             Name = "Revelator Coffee Company",
-                            State = "TN"
+                            StateAbbrev = "TN"
                         },
                         new
                         {
@@ -456,7 +483,7 @@ namespace RateTheRoast.Data.Migrations
                             Address = "711 Gallatin Ave",
                             City = "Nashville",
                             Name = "Kroger",
-                            State = "TN"
+                            StateAbbrev = "TN"
                         });
                 });
 
@@ -512,7 +539,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!",
                             Price = 12.99,
                             Score = 9,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "1b518e91-a5fc-47cb-adfd-d946329b5970"
                         },
                         new
                         {
@@ -524,7 +551,7 @@ namespace RateTheRoast.Data.Migrations
                             Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                             Price = 15.99,
                             Score = 9,
-                            UserId = "57e3ed46-19c3-4c0c-bc9e-cbe04e660a8b"
+                            UserId = "1b518e91-a5fc-47cb-adfd-d946329b5970"
                         });
                 });
 
@@ -582,12 +609,14 @@ namespace RateTheRoast.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("State")
+                    b.Property<string>("StateAbbrev")
                         .IsRequired();
 
                     b.Property<string>("UserId");
 
                     b.HasKey("RoasterId");
+
+                    b.HasIndex("StateAbbrev");
 
                     b.HasIndex("UserId")
                         .IsUnique()
@@ -601,36 +630,328 @@ namespace RateTheRoast.Data.Migrations
                             RoasterId = 1,
                             City = "Nashville",
                             Name = "Bongo Java",
-                            State = "TN",
-                            UserId = "9692dd2b-b06b-48e2-a43c-dd8c77ae2814"
+                            StateAbbrev = "TN",
+                            UserId = "7d91e35e-00f0-4698-a8bd-e4ef13efff4c"
                         },
                         new
                         {
                             RoasterId = 2,
                             City = "Birmingham",
                             Name = "Revelator Coffee Company",
-                            State = "AL"
+                            StateAbbrev = "AL"
                         },
                         new
                         {
                             RoasterId = 3,
                             City = "New Orleans",
                             Name = "Folgers",
-                            State = "LA"
+                            StateAbbrev = "LA"
                         },
                         new
                         {
                             RoasterId = 4,
                             City = "Chicago",
                             Name = "Intelligentsia",
-                            State = "IL"
+                            StateAbbrev = "IL"
                         },
                         new
                         {
                             RoasterId = 5,
                             City = "Nashville",
                             Name = "Frothy Monkey",
-                            State = "TN"
+                            StateAbbrev = "TN"
+                        });
+                });
+
+            modelBuilder.Entity("RateTheRoast.Models.State", b =>
+                {
+                    b.Property<string>("StateAbbrev")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("StateName");
+
+                    b.HasKey("StateAbbrev");
+
+                    b.ToTable("State");
+
+                    b.HasData(
+                        new
+                        {
+                            StateAbbrev = "AL",
+                            StateName = "Alabama"
+                        },
+                        new
+                        {
+                            StateAbbrev = "AK",
+                            StateName = "Alaska"
+                        },
+                        new
+                        {
+                            StateAbbrev = "AZ",
+                            StateName = "Arizona"
+                        },
+                        new
+                        {
+                            StateAbbrev = "AR",
+                            StateName = "Arkansas"
+                        },
+                        new
+                        {
+                            StateAbbrev = "CA",
+                            StateName = "California"
+                        },
+                        new
+                        {
+                            StateAbbrev = "CO",
+                            StateName = "Colorado"
+                        },
+                        new
+                        {
+                            StateAbbrev = "CT",
+                            StateName = "Connecticut"
+                        },
+                        new
+                        {
+                            StateAbbrev = "DE",
+                            StateName = "Delaware"
+                        },
+                        new
+                        {
+                            StateAbbrev = "FL",
+                            StateName = "Florida"
+                        },
+                        new
+                        {
+                            StateAbbrev = "GA",
+                            StateName = "Georgia"
+                        },
+                        new
+                        {
+                            StateAbbrev = "HI",
+                            StateName = "Hawaii"
+                        },
+                        new
+                        {
+                            StateAbbrev = "ID",
+                            StateName = "Idaho"
+                        },
+                        new
+                        {
+                            StateAbbrev = "IL",
+                            StateName = "Illinois"
+                        },
+                        new
+                        {
+                            StateAbbrev = "IN",
+                            StateName = "Indiana"
+                        },
+                        new
+                        {
+                            StateAbbrev = "IA",
+                            StateName = "Iowa"
+                        },
+                        new
+                        {
+                            StateAbbrev = "KS",
+                            StateName = "Kansas"
+                        },
+                        new
+                        {
+                            StateAbbrev = "KY",
+                            StateName = "Kentucky"
+                        },
+                        new
+                        {
+                            StateAbbrev = "LA",
+                            StateName = "Louisiana"
+                        },
+                        new
+                        {
+                            StateAbbrev = "ME",
+                            StateName = "Maine"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MD",
+                            StateName = "Maryland"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MA",
+                            StateName = "Massachusetts"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MI",
+                            StateName = "Michigan"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MN",
+                            StateName = "Minnesota"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MS",
+                            StateName = "Mississippi"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MO",
+                            StateName = "Missouri"
+                        },
+                        new
+                        {
+                            StateAbbrev = "MT",
+                            StateName = "Montana"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NE",
+                            StateName = "Nebraska"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NV",
+                            StateName = "Nevada"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NH",
+                            StateName = "New Hampshire"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NJ",
+                            StateName = "New Jersey"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NM",
+                            StateName = "New Mexico"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NY",
+                            StateName = "New York"
+                        },
+                        new
+                        {
+                            StateAbbrev = "NC",
+                            StateName = "North Carolina"
+                        },
+                        new
+                        {
+                            StateAbbrev = "ND",
+                            StateName = "North Dakota"
+                        },
+                        new
+                        {
+                            StateAbbrev = "OH",
+                            StateName = "Ohio"
+                        },
+                        new
+                        {
+                            StateAbbrev = "OK",
+                            StateName = "Oklahoma"
+                        },
+                        new
+                        {
+                            StateAbbrev = "OR",
+                            StateName = "Oregon"
+                        },
+                        new
+                        {
+                            StateAbbrev = "PA",
+                            StateName = "Pennsylvania"
+                        },
+                        new
+                        {
+                            StateAbbrev = "RI",
+                            StateName = "Rhode Island"
+                        },
+                        new
+                        {
+                            StateAbbrev = "SC",
+                            StateName = "South Carolina"
+                        },
+                        new
+                        {
+                            StateAbbrev = "SD",
+                            StateName = "South Dakota"
+                        },
+                        new
+                        {
+                            StateAbbrev = "TN",
+                            StateName = "Tennessee"
+                        },
+                        new
+                        {
+                            StateAbbrev = "TX",
+                            StateName = "Texas"
+                        },
+                        new
+                        {
+                            StateAbbrev = "UT",
+                            StateName = "Utah"
+                        },
+                        new
+                        {
+                            StateAbbrev = "VT",
+                            StateName = "Vermont"
+                        },
+                        new
+                        {
+                            StateAbbrev = "VA",
+                            StateName = "Virgina"
+                        },
+                        new
+                        {
+                            StateAbbrev = "WA",
+                            StateName = "Washington"
+                        },
+                        new
+                        {
+                            StateAbbrev = "WV",
+                            StateName = "West Virginia"
+                        },
+                        new
+                        {
+                            StateAbbrev = "WI",
+                            StateName = "Wisconsin"
+                        },
+                        new
+                        {
+                            StateAbbrev = "WY",
+                            StateName = "Wyoming"
+                        });
+                });
+
+            modelBuilder.Entity("RateTheRoast.Models.Wishlist", b =>
+                {
+                    b.Property<int>("WishlistId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CoffeeId");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("WishlistId");
+
+                    b.HasIndex("CoffeeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Wishlist");
+
+                    b.HasData(
+                        new
+                        {
+                            WishlistId = 1,
+                            CoffeeId = 2,
+                            UserId = "1b518e91-a5fc-47cb-adfd-d946329b5970"
                         });
                 });
 
@@ -679,17 +1000,25 @@ namespace RateTheRoast.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("RateTheRoast.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("RateTheRoast.Models.State", "State")
+                        .WithMany("Users")
+                        .HasForeignKey("StateAbbrev")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("RateTheRoast.Models.Coffee", b =>
                 {
                     b.HasOne("RateTheRoast.Models.RoastIntensity", "RoastIntensity")
                         .WithMany("Coffees")
                         .HasForeignKey("RoastIntensityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RateTheRoast.Models.Roaster", "Roaster")
                         .WithMany("Coffees")
                         .HasForeignKey("RoasterId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RateTheRoast.Models.Favorite", b =>
@@ -697,12 +1026,24 @@ namespace RateTheRoast.Data.Migrations
                     b.HasOne("RateTheRoast.Models.Coffee", "Coffee")
                         .WithMany("Favorites")
                         .HasForeignKey("CoffeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
                         .WithMany("Favorites")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("RateTheRoast.Models.Location", b =>
+                {
+                    b.HasOne("RateTheRoast.Models.State", "State")
+                        .WithMany("Locations")
+                        .HasForeignKey("StateAbbrev")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("RateTheRoast.Models.Review", b =>
@@ -710,12 +1051,12 @@ namespace RateTheRoast.Data.Migrations
                     b.HasOne("RateTheRoast.Models.BrewMethod", "BrewMethod")
                         .WithMany("Reviews")
                         .HasForeignKey("BrewMethodId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RateTheRoast.Models.Coffee", "Coffee")
                         .WithMany()
                         .HasForeignKey("CoffeeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RateTheRoast.Models.Location", "Location")
                         .WithMany("Reviews")
@@ -724,14 +1065,32 @@ namespace RateTheRoast.Data.Migrations
                     b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RateTheRoast.Models.Roaster", b =>
                 {
+                    b.HasOne("RateTheRoast.Models.State", "State")
+                        .WithMany("Roasters")
+                        .HasForeignKey("StateAbbrev")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
                         .WithOne("Roaster")
                         .HasForeignKey("RateTheRoast.Models.Roaster", "UserId");
+                });
+
+            modelBuilder.Entity("RateTheRoast.Models.Wishlist", b =>
+                {
+                    b.HasOne("RateTheRoast.Models.Coffee", "Coffee")
+                        .WithMany("Wishlists")
+                        .HasForeignKey("CoffeeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

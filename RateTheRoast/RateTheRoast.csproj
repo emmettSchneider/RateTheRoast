@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -11,12 +11,25 @@
     <Compile Remove="Data\Migrations\20190612161455_RateTheRoastTables.Designer.cs" />
     <Compile Remove="Data\Migrations\20190612170938_RateTheRoastTables.cs" />
     <Compile Remove="Data\Migrations\20190612170938_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190612173937_add-migration RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190612173937_add-migration RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190612193146_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190612193146_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190612200822_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190612200822_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190613232220_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190613232220_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190614203115_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190614203115_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190615203213_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190615203213_RateTheRoastTables.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
 </Project>
