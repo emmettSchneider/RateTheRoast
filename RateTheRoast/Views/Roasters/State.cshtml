@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<RateTheRoast.Models.Roaster>
 
 @{
-    ViewData["Title"] = "RoastersByState";
+    ViewData["Title"] = "State";
 }
 
 <h1>Roasters</h1>
@@ -21,9 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.StateAbbrev)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,21 +29,13 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <a asp-action="Details" asp-route-id="@item.RoasterId">@Html.DisplayFor(modelItem => item.Name)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.StateAbbrev)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ImagePath)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.RoasterId">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.RoasterId">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.RoasterId">Delete</a>
                 </td>
             </tr>
         }

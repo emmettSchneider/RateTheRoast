@@ -22,8 +22,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a href=@($"http://localhost:5000/Roasters/RoastersByState/{item.StateAbbrev}")>@Html.DisplayFor(modelItem => item.StateName) </a>
+                <a href=@($"http://localhost:5000/Roasters/State/{item.StateAbbrev}")>@Html.DisplayFor(modelItem => item.StateName) </a>
                 @*asp-route-id="@item.StateAbbrev">*@
+
                 @*@Html.DisplayFor(modelItem => item.StateName)*@
             </td>
         </tr>

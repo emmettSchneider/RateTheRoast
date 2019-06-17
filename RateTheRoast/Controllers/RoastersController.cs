@@ -27,7 +27,7 @@ namespace RateTheRoast.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        public async Task<IActionResult> RoastersByState(string id)
+        public async Task<IActionResult> State(string id)
         {
             var roasters = _context.Roaster
                 .Include(r => r.State)
@@ -51,6 +51,7 @@ namespace RateTheRoast.Controllers
             var roaster = await _context.Roaster
                 .Include(r => r.State)
                 .Include(r => r.User)
+                .Include(r => r.Coffees)
                 .FirstOrDefaultAsync(m => m.RoasterId == id);
             if (roaster == null)
             {
