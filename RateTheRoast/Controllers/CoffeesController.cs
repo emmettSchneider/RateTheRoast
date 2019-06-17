@@ -58,6 +58,7 @@ namespace RateTheRoast.Views
             var coffee = await _context.Coffee
                 .Include(c => c.RoastIntensity)
                 .Include(c => c.Roaster)
+                .Include(c => c.Reviews).ThenInclude(c => c.BrewMethod)
                 .FirstOrDefaultAsync(m => m.CoffeeId == id);
             if (coffee == null)
             {
