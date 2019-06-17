@@ -50,9 +50,10 @@ namespace RateTheRoast.Controllers
 
             var roaster = await _context.Roaster
                 .Include(r => r.State)
-                .Include(r => r.User)
-                .Include(r => r.Coffees)
+                .Include(r => r.Coffees).ThenInclude(c => c.RoastIntensity)
                 .FirstOrDefaultAsync(m => m.RoasterId == id);
+
+
             if (roaster == null)
             {
                 return NotFound();

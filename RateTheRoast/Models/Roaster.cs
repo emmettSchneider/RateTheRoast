@@ -27,8 +27,6 @@ namespace RateTheRoast.Models
 
         [Display(Name = "Roaster Logo")]
         public string ImagePath { get; set; }
-
-        public int CoffeeId { get; set; }
         public ICollection <Coffee> Coffees { get; set; }
     }
 }
