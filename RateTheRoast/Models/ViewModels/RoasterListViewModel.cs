@@ -2,7 +2,7 @@
 using RateTheRoast.Models;
 using RateTheRoast.Data;
 
-namespace RateTheRoast.Models.RoasterViewModels
+namespace RateTheRoast.Models.ViewModels
 {
     public class RoasterListViewModel
     {

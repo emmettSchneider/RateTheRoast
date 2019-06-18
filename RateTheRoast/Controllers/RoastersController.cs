@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
-using RateTheRoast.Models.RoasterViewModels;
+using RateTheRoast.Models.ViewModels;
 
 namespace RateTheRoast.Controllers
 {

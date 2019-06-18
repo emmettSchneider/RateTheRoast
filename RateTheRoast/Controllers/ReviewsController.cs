@@ -5,19 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
+using RateTheRoast.Models.ViewModels;
 
 namespace RateTheRoast.Views
 {
     public class ReviewsController : Controller
+        
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ReviewsController(ApplicationDbContext context)
+        public ReviewsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Reviews
         public async Task<IActionResult> Index()
@@ -49,13 +57,16 @@ namespace RateTheRoast.Views
         }
 
         // GET: Reviews/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId");
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description");
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId");
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            return View();
+            CoffeeViewModel coffeeViewModel = new CoffeeViewModel
+            {
+                Coffee = _context.Coffee.Find(id)
+            };
+            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method");
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name");
+
+            return View(coffeeViewModel);
         }
 
         // POST: Reviews/Create
@@ -63,19 +74,26 @@ namespace RateTheRoast.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReviewId,CoffeeId,UserId,DateCreated,DateEdited,BrewMethodId,Price,LocationId,Narrative,Score")] Review review)
+        public async Task<IActionResult> Create(CoffeeViewModel newReview)
         {
+            
+
+            var returnToCoffee = newReview.Review.CoffeeId;
+            var loggedInUser = await GetCurrentUserAsync();
+
+            ModelState.Remove("ReviewId");
+            ModelState.Remove("Review.UserId");
+
             if (ModelState.IsValid)
             {
-                _context.Add(review);
+                newReview.Review.UserId = loggedInUser.Id;
+                _context.Add(newReview.Review);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Reviews", "Coffees", new { id = returnToCoffee });
             }
-            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId", review.BrewMethodId);
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description", review.CoffeeId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", review.LocationId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", review.UserId);
-            return View(review);
+            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId", newReview.Review.BrewMethodId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", newReview.Review.LocationId);
+            return View(newReview);
         }
 
         // GET: Reviews/Edit/5
