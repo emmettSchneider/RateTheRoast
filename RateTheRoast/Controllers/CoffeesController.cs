@@ -16,12 +16,16 @@ namespace RateTheRoast.Views
     public class CoffeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CoffeesController(ApplicationDbContext context)
+        public CoffeesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
 
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Coffees
         public async Task<IActionResult> Index(string SearchString)
@@ -59,11 +63,15 @@ namespace RateTheRoast.Views
                 return NotFound();
             }
 
+            var loggedInUser = await GetCurrentUserAsync();
+
             var coffee = await _context.Coffee
                 .Include(c => c.RoastIntensity)
                 .Include(c => c.Roaster)
                 .Include(c => c.Reviews).ThenInclude(c => c.BrewMethod)
                 .Include(c => c.Reviews).ThenInclude(c => c.User)
+                .Include(c => c.Wishlists).ThenInclude(c => c.User)
+                .Include(c => c.Favorites).ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.CoffeeId == id);
 
             if (coffee == null)

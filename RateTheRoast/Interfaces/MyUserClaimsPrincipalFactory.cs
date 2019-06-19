@@ -22,6 +22,7 @@ namespace RateTheRoast.Interfaces
         {
             var identity = await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("Handle", user.Handle));
+            identity.AddClaim(new Claim("Id", user.Id));
             return identity;
         }
     } 

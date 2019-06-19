@@ -26,6 +26,7 @@ namespace RateTheRoast.Models
         public Roaster Roaster { get; set; }
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<Wishlist> Wishlists { get; set; }
 
     }
 

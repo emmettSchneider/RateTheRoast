@@ -40,9 +40,13 @@ namespace RateTheRoast.Models
         [Required]
         public RoastIntensity RoastIntensity { get; set; }
 
-        public ICollection<Favorite> Favorites { get; set; }
+        public Favorite Favorite { get; set; }
         public ICollection<Review> Reviews { get; set; }
+
+        public Wishlist Wishlist { get; set; }
         public ICollection<Wishlist> Wishlists { get; set; }
+
+        public ICollection<Favorite> Favorites { get; set; }
 
     }
 }

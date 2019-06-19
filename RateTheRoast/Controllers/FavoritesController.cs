@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
 
@@ -13,16 +14,27 @@ namespace RateTheRoast.Views
     public class FavoritesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FavoritesController(ApplicationDbContext context)
+        public FavoritesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Favorites
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Favorite.Include(f => f.Coffee).Include(f => f.User);
+            var loggedInUser = await GetCurrentUserAsync();
+
+            var applicationDbContext = _context.Favorite
+                .Where(f => f.User.Id == loggedInUser.Id)
+                .Include(f => f.User)
+                .Include(f => f.Coffee)
+                .ThenInclude(f => f.Roaster)
+                .OrderBy(f => f.Coffee.Name);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -47,11 +59,15 @@ namespace RateTheRoast.Views
         }
 
         // GET: Favorites/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description");
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            return View();
+            Coffee favoritedCoffee = _context.Coffee.Find(id);
+            Favorite newFavorite = new Favorite
+            {
+                Coffee = favoritedCoffee,
+                CoffeeId = id
+            };
+            return View(newFavorite);
         }
 
         // POST: Favorites/Create
@@ -61,14 +77,18 @@ namespace RateTheRoast.Views
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FavoriteId,UserId,CoffeeId")] Favorite favorite)
         {
+            var loggedInUser = await GetCurrentUserAsync();
+            favorite.UserId = loggedInUser.Id;
+            ModelState.Remove("UserId");
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(favorite);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description", favorite.CoffeeId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", favorite.UserId);
+
             return View(favorite);
         }
 
