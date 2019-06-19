@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
+using RateTheRoast.Models.ViewModels;
 
 namespace RateTheRoast.Views
 {
@@ -62,7 +63,7 @@ namespace RateTheRoast.Views
                 .Include(c => c.RoastIntensity)
                 .Include(c => c.Roaster)
                 .Include(c => c.Reviews).ThenInclude(c => c.BrewMethod)
-                .Include(c => c.Reviews).ThenInclude(c => c.Users)
+                .Include(c => c.Reviews).ThenInclude(c => c.User)
                 .FirstOrDefaultAsync(m => m.CoffeeId == id);
 
             if (coffee == null)

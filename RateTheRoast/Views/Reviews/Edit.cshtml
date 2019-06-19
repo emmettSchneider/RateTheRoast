@@ -4,6 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
+@{ DateTime myDateTime = DateTime.Now;
+string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");}
+
 <h1>Edit</h1>
 
 <h4>Review</h4>
@@ -12,9 +15,10 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ReviewId" value="@Model.ReviewId"/>
-            <input type="hidden" asp-for="CoffeeId" value="@Model.CoffeeId"/>
-            <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+            <input type="hidden" asp-for="ReviewId" value="@Model.ReviewId" />
+            <input type="hidden" asp-for="CoffeeId" value="@Model.CoffeeId" />
+            <input type="hidden" asp-for="UserId" value="@sqlFormattedDate" />
+            <input type="hidden" asp-for="DateEdited" value="" />
             <div class="form-group">
                 <label asp-for="BrewMethodId" class="control-label"></label>
                 <select asp-for="BrewMethodId" class="form-control" asp-items="ViewBag.BrewMethodId"></select>

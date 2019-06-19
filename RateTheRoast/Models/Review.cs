@@ -43,7 +43,7 @@ namespace RateTheRoast.Models
 
         public BrewMethod BrewMethod { get; set; }
 
-        public ICollection<ApplicationUser> Users { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
 
