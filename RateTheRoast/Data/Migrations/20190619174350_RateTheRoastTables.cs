@@ -346,9 +346,9 @@ namespace RateTheRoast.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Handle", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedHandle", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StateAbbrev", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "38e06a5a-ec27-4654-b932-bee38e8c4187", 0, "Nashville", "73146e69-81eb-4ce0-b5e9-2f37e0c6204f", "admin@admin.com", true, "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAELV0Bs3s2OVhmOp1w2Ta7guJl2aARhypuaADu9KuPEIbhUiD2hPNsJQvIJbcSwzGdw==", null, false, "abec7ecf-d9ca-4c7a-80f8-bf523b8d97d4", "TN", false, "admin@admin.com" },
-                    { "e032474e-2d8d-4fbf-be4b-27493b54c218", 0, "Chattanooga", "2fd6c45c-d0e7-4ec5-926b-dcfb3dd976af", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAENys4wEyjCGyxI32WCyrN4qnSfcHwNSnf47rxFDiwjfgYODnP1tVN9RIpZDzD4sfoQ==", null, false, "37706e96-0b2a-4a22-ba55-348c4f34560f", "TN", false, "barnyardbarista@hotmail.com" },
-                    { "02ffb645-61de-4873-9af2-7b59f440be93", 0, "Nashville", "c964184a-96c6-4926-9205-a6941c82f18a", "info@bongojava.com", true, "BongoJava", false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEIwZDVZYsxuxUZnfuQUPutWv1g8J9dmfP1tE19mhBbBQC2WSzVTKJQnw0iWe0gTjMw==", null, false, "01bdca05-49da-4993-bb0f-f3b6256324d0", "TN", false, "info@bongojava.com" }
+                    { "7aa274b4-b41e-4c12-b162-3d41bbb1fbc1", 0, "Nashville", "f29119dd-f6e5-4064-9379-d462fbd9e179", "admin@admin.com", true, "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEJO+BSQyXLGM+Z/AtzPLWrKsUtBdBbF844n42CC5DtiPZQ2I8aUt7aSFQ98J9RDXNQ==", null, false, "4f71f124-3a0e-43a6-aea1-6f52e5600149", "TN", false, "admin@admin.com" },
+                    { "d50c6628-08a5-48e1-9aa1-7c3669981986", 0, "Chattanooga", "6156724c-c763-4b94-a6d5-3da120932f0e", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEEKfw6CUUo90LGdGkz3IJ7Kwc3+jQ0gnQKHEPCL1Ww81WOvUwddQpU51et/ENWcQOQ==", null, false, "cabe7d36-944e-40d5-9fdd-297d84a22d98", "TN", false, "barnyardbarista@hotmail.com" },
+                    { "fd1e163a-a6f6-459f-ab3b-a536c1e15a57", 0, "Nashville", "949e30f5-37ba-40fc-a4cc-7a42f89f2a77", "info@bongojava.com", true, "BongoJava", false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEAVJM6ptIEQHigQotq7lBfi2qBWXdyELo/T0tuTVZU1n3vy/aupHOYPMln3+K/NpJg==", null, false, "e53f5641-3d6b-4107-be54-35131fe92ba7", "TN", false, "info@bongojava.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -386,7 +386,7 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Roaster",
                 columns: new[] { "RoasterId", "City", "ImagePath", "Name", "StateAbbrev", "UserId" },
-                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "02ffb645-61de-4873-9af2-7b59f440be93" });
+                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "fd1e163a-a6f6-459f-ab3b-a536c1e15a57" });
 
             migrationBuilder.InsertData(
                 table: "Coffee",
@@ -401,22 +401,22 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Favorite",
                 columns: new[] { "FavoriteId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 4, "e032474e-2d8d-4fbf-be4b-27493b54c218" });
+                values: new object[] { 1, 4, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
 
             migrationBuilder.InsertData(
                 table: "Review",
-                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 2, 6, 4, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "e032474e-2d8d-4fbf-be4b-27493b54c218" });
+                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "LocationId", "Narrative", "Price", "Score", "UserId" },
+                values: new object[] { 2, 6, 4, null, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
 
             migrationBuilder.InsertData(
                 table: "Wishlist",
                 columns: new[] { "WishlistId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 2, "e032474e-2d8d-4fbf-be4b-27493b54c218" });
+                values: new object[] { 1, 2, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
 
             migrationBuilder.InsertData(
                 table: "Review",
-                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 1, 6, 1, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "e032474e-2d8d-4fbf-be4b-27493b54c218" });
+                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "LocationId", "Narrative", "Price", "Score", "UserId" },
+                values: new object[] { 1, 6, 1, null, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_StateAbbrev",
@@ -544,17 +544,17 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "02ffb645-61de-4873-9af2-7b59f440be93");
+                keyValue: "7aa274b4-b41e-4c12-b162-3d41bbb1fbc1");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "38e06a5a-ec27-4654-b932-bee38e8c4187");
+                keyValue: "d50c6628-08a5-48e1-9aa1-7c3669981986");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "e032474e-2d8d-4fbf-be4b-27493b54c218");
+                keyValue: "fd1e163a-a6f6-459f-ab3b-a536c1e15a57");
 
             migrationBuilder.DropColumn(
                 name: "City",
