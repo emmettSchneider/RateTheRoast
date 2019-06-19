@@ -11,22 +11,7 @@
 
 
 <h1>Details</h1>
-@{ if (User.Identity.IsAuthenticated)
-    {
-        String loggedInUserHandle = User.FindFirst("Handle").Value;
-
-        foreach (var favorite in Model.Favorites)
-        {
-            try
-            {
-                if (favorite.User.Handle != loggedInUserHandle)
-                {
-                }
-            } catch (NullReferenceException e)
-            { <a asp-action="Create" asp-controller="Favorites" asp-route-id="@Model.CoffeeId">Add to favorites</a>};
-        }
-    }
-}
+<p><a asp-action="Create" asp-controller="Favorites" asp-route-id="@Model.CoffeeId">Add to favorites</a></p>
 <div>
     <h4>Coffee</h4>
     <hr />
