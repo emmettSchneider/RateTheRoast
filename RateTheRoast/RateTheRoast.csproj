@@ -23,6 +23,8 @@
     <Compile Remove="Data\Migrations\20190614203115_RateTheRoastTables.Designer.cs" />
     <Compile Remove="Data\Migrations\20190615203213_RateTheRoastTables.cs" />
     <Compile Remove="Data\Migrations\20190615203213_RateTheRoastTables.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190615223939_RateTheRoastTables.cs" />
+    <Compile Remove="Data\Migrations\20190615223939_RateTheRoastTables.Designer.cs" />
   </ItemGroup>
 
 

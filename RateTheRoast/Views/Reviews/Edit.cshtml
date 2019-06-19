@@ -5,7 +5,8 @@
 }
 
 @{ DateTime myDateTime = DateTime.Now;
-string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");}
+string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.ffffff");
+    string timeOfEdit = sqlFormattedDate;}
 
 <h1>Edit</h1>
 
@@ -17,8 +18,9 @@ string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");}
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ReviewId" value="@Model.ReviewId" />
             <input type="hidden" asp-for="CoffeeId" value="@Model.CoffeeId" />
-            <input type="hidden" asp-for="UserId" value="@sqlFormattedDate" />
-            <input type="hidden" asp-for="DateEdited" value="" />
+            <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+            <input type="hidden" asp-for="DateCreated" value="@Model.DateCreated" />
+            <input type="hidden" asp-for="DateEdited" value="@timeOfEdit" />
             <div class="form-group">
                 <label asp-for="BrewMethodId" class="control-label"></label>
                 <select asp-for="BrewMethodId" class="form-control" asp-items="ViewBag.BrewMethodId"></select>
