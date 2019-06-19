@@ -66,7 +66,6 @@ namespace RateTheRoast.Controllers
         public IActionResult Create()
         {
             ViewData["StateAbbrev"] = new SelectList(_context.State, "StateAbbrev", "StateAbbrev");
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -75,7 +74,7 @@ namespace RateTheRoast.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoasterId,UserId,Name,City,StateAbbrev,ImagePath")] Roaster roaster)
+        public async Task<IActionResult> Create(Roaster roaster)
         {
             if (ModelState.IsValid)
             {
