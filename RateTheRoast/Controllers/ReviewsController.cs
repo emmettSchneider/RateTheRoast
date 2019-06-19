@@ -56,8 +56,8 @@ namespace RateTheRoast.Views
             return View(review);
         }
 
-        // GET: Reviews/Create
-        public IActionResult Create(int id)
+        // GET: Reviews/Add
+        public IActionResult Add(int id)
         {
             CoffeeViewModel coffeeViewModel = new CoffeeViewModel
             {
@@ -74,7 +74,7 @@ namespace RateTheRoast.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CoffeeViewModel newReview)
+        public async Task<IActionResult> Add(CoffeeViewModel newReview)
         {
             
 
@@ -91,8 +91,8 @@ namespace RateTheRoast.Views
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Reviews", "Coffees", new { id = returnToCoffee });
             }
-            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId", newReview.Review.BrewMethodId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", newReview.Review.LocationId);
+            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", newReview.Review.BrewMethodId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", newReview.Review.LocationId);
             return View(newReview);
         }
 
@@ -109,10 +109,8 @@ namespace RateTheRoast.Views
             {
                 return NotFound();
             }
-            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId", review.BrewMethodId);
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description", review.CoffeeId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", review.LocationId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", review.UserId);
+            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", review.BrewMethodId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", review.LocationId);
             return View(review);
         }
 
@@ -146,12 +144,10 @@ namespace RateTheRoast.Views
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Reviews", "Coffees", new { id = review.CoffeeId });
             }
-            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "BrewMethodId", review.BrewMethodId);
-            ViewData["CoffeeId"] = new SelectList(_context.Coffee, "CoffeeId", "Description", review.CoffeeId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", review.LocationId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", review.UserId);
+            ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", review.BrewMethodId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", review.LocationId);
             return View(review);
         }
 
@@ -185,7 +181,7 @@ namespace RateTheRoast.Views
             var review = await _context.Review.FindAsync(id);
             _context.Review.Remove(review);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Reviews", "Coffees", new { id = review.CoffeeId });
         }
 
         private bool ReviewExists(int id)

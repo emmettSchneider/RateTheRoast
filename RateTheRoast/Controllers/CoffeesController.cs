@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using RateTheRoast.Data;
 using RateTheRoast.Models;
 
@@ -17,6 +19,7 @@ namespace RateTheRoast.Views
         public CoffeesController(ApplicationDbContext context)
         {
             _context = context;
+
         }
 
         // GET: Coffees
@@ -40,7 +43,7 @@ namespace RateTheRoast.Views
             else
             {
                 var applicationDbContext = _context.Coffee
-                    .OrderByDescending(c => c.DateAdded).Take(20); 
+                    .OrderByDescending(c => c.DateAdded).Take(20);
 
                 return View(await applicationDbContext.ToListAsync());
             }
@@ -59,7 +62,9 @@ namespace RateTheRoast.Views
                 .Include(c => c.RoastIntensity)
                 .Include(c => c.Roaster)
                 .Include(c => c.Reviews).ThenInclude(c => c.BrewMethod)
+                .Include(c => c.Reviews).ThenInclude(c => c.Users)
                 .FirstOrDefaultAsync(m => m.CoffeeId == id);
+
             if (coffee == null)
             {
                 return NotFound();

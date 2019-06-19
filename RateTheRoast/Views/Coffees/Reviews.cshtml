@@ -1,8 +1,13 @@
 ﻿@model RateTheRoast.Models.Coffee
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
-@{
-    ViewData["Title"] = "Reviews";
-}
+@{ViewData["Title"] = "Reviews";}
+
+@{String loggedInUser = User.FindFirst("Handle").Value; }
+
+
 
 <h1>Details</h1>
 
@@ -57,18 +62,23 @@
         </dt>
         @foreach (var review in Model.Reviews)
         {
-    <dd class="col-sm-10">
-        @Html.DisplayFor(model => review.User)
-        @Html.DisplayFor(model => review.DateCreated)
-        @Html.DisplayFor(model => review.Score)
-        @Html.DisplayFor(model => review.Price)
-        @Html.DisplayFor(model => review.Narrative)
-    </dd>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => review.Users)
+                @Html.DisplayFor(model => review.DateCreated)
+                @Html.DisplayFor(model => review.Score)
+                @Html.DisplayFor(model => review.Price)
+                @Html.DisplayFor(model => review.Narrative)
+                @if (review.UserId == loggedInUser)
+                {
+                    <a asp-action="Edit" asp-controller="Reviews" asp-route-id="@review.ReviewId">Edit</a>
+                }
+                <a asp-action="Delete" asp-controller="Reviews" asp-route-id="@review.ReviewId">Delete</a>
+            </dd>
         }
     </dl>
 </div>
 <div>
-    <a asp-action="Create" asp-controller="Reviews" asp-route-id="@Model.CoffeeId">Add review</a>
+    <a asp-action="Add" asp-controller="Reviews" asp-route-id="@Model.CoffeeId">Add review</a>
     <a asp-action="Edit" asp-route-id="@Model.CoffeeId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
