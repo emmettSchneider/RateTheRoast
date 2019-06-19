@@ -126,6 +126,8 @@ namespace RateTheRoast.Views
                 return NotFound();
             }
 
+            review.DateEdited = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 try

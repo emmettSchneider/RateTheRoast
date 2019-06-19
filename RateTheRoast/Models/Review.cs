@@ -22,7 +22,6 @@ namespace RateTheRoast.Models
         public DateTime DateCreated { get; set; }
 
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? DateEdited { get; set; }
 
         public int BrewMethodId { get; set; }
