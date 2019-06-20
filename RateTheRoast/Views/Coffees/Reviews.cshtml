@@ -7,70 +7,30 @@
 @{ViewData["Title"] = "Reviews";}
 
 
+<div class="jumbotron">
+    <h1 class="display-4">@Html.DisplayFor(model => model.Name)</h1>
+    <p class="lead">@Html.DisplayFor(model => model.Roaster.Name) @Html.DisplayFor(model => model.Roaster.City), @Html.DisplayFor(model => model.Roaster.StateAbbrev)</p>
+    <p class="lead">
+        @Html.DisplayFor(model => model.RoastIntensity.Intensity) roast from @Html.DisplayFor(model => model.Origin)
+        @if (Model.Origin != "Blend") { Html.Display(","); } else { }
+        @if (Model.Origin != "Blend") { Html.DisplayFor(model => model.Region); } else { }
+    </p>
+    <p class="lead">@Html.DisplayFor(model => model.Description) roast</p>
+    <hr class="my-4">
+    <p>Browse @Html.DisplayFor(model => model.Name)'s coffees below. Do you know of one that isn't on our list? Add it!</p>
+</div>
 
-
-
-<h1>Details</h1>
-<p><a asp-action="Create" asp-controller="Favorites" asp-route-id="@Model.CoffeeId">Add to favorites</a></p>
-<div>
-    <h4>Coffee</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Origin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Origin)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Region)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Region)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Roaster)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Roaster.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RoastIntensity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RoastIntensity.Intensity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Reviews)
-        </dt>
-        @foreach (var review in Model.Reviews)
-        {
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => review.User.Handle)
-                @Html.DisplayFor(model => review.DateCreated)
-                @if (review.DateEdited != null)
-                {@Html.DisplayFor(model => review.DateEdited)}
-                @Html.DisplayFor(model => review.Score)
-                @Html.DisplayFor(model => review.Price)
-                @Html.DisplayFor(model => review.Narrative)
+<div class="card-columns">
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="card">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"> Roast score @Html.DisplayFor(model => review.Score) </h5>
+                <p class="card-text"><strong> reviewed by @Html.DisplayFor(model => review.User.Handle) </strong></p>
+                <p class="card-text"> created on @Html.DisplayFor(model => review.DateCreated) </p>
+                <p class="card-text"> purchased at @Html.DisplayFor(model => review.PurchaseAddress) @Html.DisplayFor(model => review.PurchaseCity), @Html.DisplayFor(model => review.StateAbbrev) </p>
+                <p class="card-text"> created on @Html.DisplayFor(model => review.Narrative) </p>
                 @{ if (User.Identity.IsAuthenticated)
                     {
                         String loggedInUserHandle = User.FindFirst("Handle").Value;
@@ -81,10 +41,11 @@
                         }
                     }
                 }
-            </dd>
-        }
-    </dl>
+            </div>
+        </div>
+    }
 </div>
+
 <div>
     <a asp-action="Add" asp-controller="Reviews" asp-route-id="@Model.CoffeeId">Add review</a>
     <a asp-action="Edit" asp-route-id="@Model.CoffeeId">Edit</a> |

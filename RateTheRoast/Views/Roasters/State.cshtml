@@ -14,7 +14,6 @@
         <div class="card-body">
             <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
             <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.StateAbbrev)</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <a asp-action="Details" asp-route-id="@item.RoasterId" class="card-link text-info">View coffees from @Html.DisplayFor(modelItem => item.Name)</a>
         </div>
     </div>
