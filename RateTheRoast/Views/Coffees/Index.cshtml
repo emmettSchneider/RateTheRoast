@@ -4,68 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3 class="lead"><strong>Coffee search results</strong></h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Origin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roaster)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoastIntensity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Origin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Region)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Roaster.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoastIntensity.RoastIntensityId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CoffeeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CoffeeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CoffeeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<ul class="list-group list-group-flush">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <strong><a class="text-info" asp-action="Reviews" asp-controller="Coffees" asp-route-id="@item.CoffeeId">@Html.DisplayFor(model => item.Name)</a></strong>
+            is a @Html.DisplayFor(modelItem => item.RoastIntensity.Intensity) roast from
+            <a class="text-info" asp-action="Details" asp-controller="Roasters" asp-route-id="@item.RoasterId">@Html.DisplayFor(modelItem => item.Roaster.Name)</a>
+            in @Html.DisplayFor(modelItem => item.Roaster.City),
+            @Html.DisplayFor(modelItem => item.Roaster.StateAbbrev)
+        </li>
+
+    }
+</ul>
+

@@ -35,7 +35,7 @@ namespace RateTheRoast.Views
             if (SearchString != null)
             {
 
-                var applicationDbContext = _context.Coffee.Include(r => r.Roaster)
+                var applicationDbContext = _context.Coffee.Include(r => r.Roaster).Include(ri => ri.RoastIntensity)
 
                    .Where(c => c.Name.Contains(SearchString) || c.Roaster.Name.Contains(SearchString)
                    || c.Roaster.City.Contains(SearchString))
