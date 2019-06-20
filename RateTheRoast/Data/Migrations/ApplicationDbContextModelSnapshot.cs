@@ -200,10 +200,10 @@ namespace RateTheRoast.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7aa274b4-b41e-4c12-b162-3d41bbb1fbc1",
+                            Id = "ada48f36-1a43-418d-9eb9-0aa1979749bd",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "f29119dd-f6e5-4064-9379-d462fbd9e179",
+                            ConcurrencyStamp = "bca24a23-76b8-41b3-97b7-0be31d29931a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             Handle = "admin",
@@ -211,19 +211,19 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedHandle = "ADMIN",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJO+BSQyXLGM+Z/AtzPLWrKsUtBdBbF844n42CC5DtiPZQ2I8aUt7aSFQ98J9RDXNQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF+vFH4DNWNDevRx/sTLdGH3hWwczflYBz6G7LFfSJxw9WtlUlP8d6fASEuU3OFpzA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f71f124-3a0e-43a6-aea1-6f52e5600149",
+                            SecurityStamp = "0e360fde-1184-4e63-972c-d2fafbd2eeea",
                             StateAbbrev = "TN",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
                         new
                         {
-                            Id = "d50c6628-08a5-48e1-9aa1-7c3669981986",
+                            Id = "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3",
                             AccessFailedCount = 0,
                             City = "Chattanooga",
-                            ConcurrencyStamp = "6156724c-c763-4b94-a6d5-3da120932f0e",
+                            ConcurrencyStamp = "058779cf-62f5-46b6-9558-eb7bf6d3a8d5",
                             Email = "barnyardbarista@hotmail.com",
                             EmailConfirmed = true,
                             Handle = "BarnyardBarista",
@@ -231,19 +231,19 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "BARNYARDBARISTA@HOTMAIL.COM",
                             NormalizedHandle = "BARNYARDBARISTA",
                             NormalizedUserName = "BARNYARDBARISTA@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEKfw6CUUo90LGdGkz3IJ7Kwc3+jQ0gnQKHEPCL1Ww81WOvUwddQpU51et/ENWcQOQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPmCZYQUqfHonIQ4GFJ0efamvpHrFyE1XTmRB3oDzLXidGTSwtfxOOYVcfEyuNm1Wg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cabe7d36-944e-40d5-9fdd-297d84a22d98",
+                            SecurityStamp = "dccc01ae-54e1-4b05-bfef-486172fb1f07",
                             StateAbbrev = "TN",
                             TwoFactorEnabled = false,
                             UserName = "barnyardbarista@hotmail.com"
                         },
                         new
                         {
-                            Id = "fd1e163a-a6f6-459f-ab3b-a536c1e15a57",
+                            Id = "b9d0608d-1569-4150-bf19-f2bcd472ecb8",
                             AccessFailedCount = 0,
                             City = "Nashville",
-                            ConcurrencyStamp = "949e30f5-37ba-40fc-a4cc-7a42f89f2a77",
+                            ConcurrencyStamp = "ce7e3cfe-9305-478b-8953-2076555f50ce",
                             Email = "info@bongojava.com",
                             EmailConfirmed = true,
                             Handle = "BongoJava",
@@ -251,9 +251,9 @@ namespace RateTheRoast.Data.Migrations
                             NormalizedEmail = "INFO@BONGOJAVA.COM",
                             NormalizedHandle = "BONGOJAVA",
                             NormalizedUserName = "INFO@BONGOJAVA.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAVJM6ptIEQHigQotq7lBfi2qBWXdyELo/T0tuTVZU1n3vy/aupHOYPMln3+K/NpJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGAb3TWM5C3YRW7mO5D2IZFSFV594HhpOqEwW8xsX29fbNHSAmFmVpjwjf3mriZT2A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e53f5641-3d6b-4107-be54-35131fe92ba7",
+                            SecurityStamp = "de7f153a-52bb-44d0-9b73-5925f6773977",
                             StateAbbrev = "TN",
                             TwoFactorEnabled = false,
                             UserName = "info@bongojava.com"
@@ -420,70 +420,7 @@ namespace RateTheRoast.Data.Migrations
                         {
                             FavoriteId = 1,
                             CoffeeId = 4,
-                            UserId = "d50c6628-08a5-48e1-9aa1-7c3669981986"
-                        });
-                });
-
-            modelBuilder.Entity("RateTheRoast.Models.Location", b =>
-                {
-                    b.Property<int>("LocationId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("StateAbbrev")
-                        .IsRequired();
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("LocationId");
-
-                    b.HasIndex("StateAbbrev");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Location");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            Address = "701 Woodland St",
-                            City = "Nashville",
-                            Name = "The Turnip Truck",
-                            StateAbbrev = "TN"
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            Address = "107 S 11th St",
-                            City = "Nashville",
-                            Name = "Bongo East",
-                            StateAbbrev = "TN"
-                        },
-                        new
-                        {
-                            LocationId = 3,
-                            Address = "1817 21st Ave S",
-                            City = "Nashville",
-                            Name = "Revelator Coffee Company",
-                            StateAbbrev = "TN"
-                        },
-                        new
-                        {
-                            LocationId = 4,
-                            Address = "711 Gallatin Ave",
-                            City = "Nashville",
-                            Name = "Kroger",
-                            StateAbbrev = "TN"
+                            UserId = "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3"
                         });
                 });
 
@@ -503,14 +440,18 @@ namespace RateTheRoast.Data.Migrations
 
                     b.Property<DateTime?>("DateEdited");
 
-                    b.Property<int?>("LocationId");
-
                     b.Property<string>("Narrative")
                         .IsRequired();
 
                     b.Property<double>("Price");
 
+                    b.Property<string>("PurchaseAddress");
+
+                    b.Property<string>("PurchaseCity");
+
                     b.Property<int>("Score");
+
+                    b.Property<string>("StateAbbrev");
 
                     b.Property<string>("UserId")
                         .IsRequired();
@@ -521,7 +462,7 @@ namespace RateTheRoast.Data.Migrations
 
                     b.HasIndex("CoffeeId");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("StateAbbrev");
 
                     b.HasIndex("UserId");
 
@@ -534,11 +475,13 @@ namespace RateTheRoast.Data.Migrations
                             BrewMethodId = 6,
                             CoffeeId = 1,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 2,
                             Narrative = "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!",
                             Price = 12.99,
+                            PurchaseAddress = "Bongo East",
+                            PurchaseCity = "Nashville",
                             Score = 9,
-                            UserId = "d50c6628-08a5-48e1-9aa1-7c3669981986"
+                            StateAbbrev = "TN",
+                            UserId = "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3"
                         },
                         new
                         {
@@ -546,11 +489,13 @@ namespace RateTheRoast.Data.Migrations
                             BrewMethodId = 6,
                             CoffeeId = 4,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LocationId = 1,
                             Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                             Price = 15.99,
+                            PurchaseAddress = "The Turnip Truck",
+                            PurchaseCity = "Nashville",
                             Score = 9,
-                            UserId = "d50c6628-08a5-48e1-9aa1-7c3669981986"
+                            StateAbbrev = "TN",
+                            UserId = "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3"
                         });
                 });
 
@@ -630,7 +575,7 @@ namespace RateTheRoast.Data.Migrations
                             City = "Nashville",
                             Name = "Bongo Java",
                             StateAbbrev = "TN",
-                            UserId = "fd1e163a-a6f6-459f-ab3b-a536c1e15a57"
+                            UserId = "b9d0608d-1569-4150-bf19-f2bcd472ecb8"
                         },
                         new
                         {
@@ -950,7 +895,7 @@ namespace RateTheRoast.Data.Migrations
                         {
                             WishlistId = 1,
                             CoffeeId = 2,
-                            UserId = "d50c6628-08a5-48e1-9aa1-7c3669981986"
+                            UserId = "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3"
                         });
                 });
 
@@ -1033,18 +978,6 @@ namespace RateTheRoast.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("RateTheRoast.Models.Location", b =>
-                {
-                    b.HasOne("RateTheRoast.Models.State", "State")
-                        .WithMany("Locations")
-                        .HasForeignKey("StateAbbrev")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("RateTheRoast.Models.Review", b =>
                 {
                     b.HasOne("RateTheRoast.Models.BrewMethod", "BrewMethod")
@@ -1057,9 +990,9 @@ namespace RateTheRoast.Data.Migrations
                         .HasForeignKey("CoffeeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("RateTheRoast.Models.Location", "Location")
+                    b.HasOne("RateTheRoast.Models.State", "State")
                         .WithMany("Reviews")
-                        .HasForeignKey("LocationId");
+                        .HasForeignKey("StateAbbrev");
 
                     b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
                         .WithMany("Reviews")
@@ -1087,7 +1020,7 @@ namespace RateTheRoast.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RateTheRoast.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Wishlists")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

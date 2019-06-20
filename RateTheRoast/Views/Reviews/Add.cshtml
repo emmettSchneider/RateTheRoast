@@ -15,7 +15,7 @@
             <input type="hidden" asp-for="Review.CoffeeId" value="@Model.Coffee.CoffeeId" />
             <div class="form-group">
                 <label asp-for="Review.BrewMethodId" class="control-label">Brew method</label>
-                <select asp-for="Review.BrewMethodId" class ="form-control" asp-items="ViewBag.BrewMethodId"></select>
+                <select asp-for="Review.BrewMethodId" class="form-control" asp-items="ViewBag.BrewMethodId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Review.Price" class="control-label">Purchase price</label>
@@ -23,8 +23,18 @@
                 <span asp-validation-for="Review.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Review.LocationId" class="control-label"></label>
-                <select asp-for="Review.LocationId" class ="form-control" asp-items="ViewBag.LocationId"></select>
+                <label asp-for="Review.PurchaseAddress" class="control-label">Purchased at</label>
+                <input asp-for="Review.PurchaseAddress" class="form-control" />
+                <span asp-validation-for="Review.PurchaseAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.PurchaseCity" class="control-label">Purchase city</label>
+                <input asp-for="Review.PurchaseCity" class="form-control" />
+                <span asp-validation-for="Review.PurchaseCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Review.StateAbbrev" class="control-label"></label>
+                <select asp-for="Review.StateAbbrev" class="form-control" asp-items="ViewBag.StateAbbrev"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Review.Narrative" class="control-label">Review</label>

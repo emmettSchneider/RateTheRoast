@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RateTheRoast.Models;
+using RateTheRoast.Models.ValidationModels;
 
 namespace RateTheRoast.Areas.Identity.Pages.Account
 {
@@ -55,6 +56,7 @@ namespace RateTheRoast.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "State")]
+            [CheckState(ValidState = "AK,AL,AR,AS,AZ,CA,CO,CT,DC,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY", ErrorMessage = "Please enter a valid USPS state abbreviation, e.g. AL, AK, AZ.")]
             public string StateAbbrev { get; set; }
 
             [Required]

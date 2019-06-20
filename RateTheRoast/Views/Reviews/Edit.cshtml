@@ -27,9 +27,18 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LocationId" class="control-label"></label>
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
-                <span asp-validation-for="LocationId" class="text-danger"></span>
+                <label asp-for="PurchaseAddress" class="control-label">Purchased at</label>
+                <input asp-for="PurchaseAddress" class="form-control" />
+                <span asp-validation-for="PurchaseAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurchaseCity" class="control-label">Purchase city</label>
+                <input asp-for="PurchaseCity" class="form-control" />
+                <span asp-validation-for="PurchaseCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StateAbbrev" class="control-label"></label>
+                <select asp-for="StateAbbrev" class="form-control" asp-items="ViewBag.StateAbbrev"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Narrative" class="control-label"></label>

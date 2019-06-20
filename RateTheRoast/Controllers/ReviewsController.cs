@@ -29,7 +29,7 @@ namespace RateTheRoast.Views
         // GET: Reviews
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Review.Include(r => r.BrewMethod).Include(r => r.Coffee).Include(r => r.Location).Include(r => r.User);
+            var applicationDbContext = _context.Review.Include(r => r.BrewMethod).Include(r => r.Coffee).Include(r => r.State).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -44,7 +44,6 @@ namespace RateTheRoast.Views
             var review = await _context.Review
                 .Include(r => r.BrewMethod)
                 .Include(r => r.Coffee)
-                .Include(r => r.Location)
                 .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.ReviewId == id);
             if (review == null)
@@ -63,7 +62,7 @@ namespace RateTheRoast.Views
                 Coffee = _context.Coffee.Find(id)
             };
             ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method");
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name");
+            ViewData["StateAbbrev"] = new SelectList(_context.State, "StateAbbrev", "StateName");
 
             return View(coffeeViewModel);
         }
@@ -91,7 +90,7 @@ namespace RateTheRoast.Views
                 return RedirectToAction("Reviews", "Coffees", new { id = returnToCoffee });
             }
             ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", newReview.Review.BrewMethodId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", newReview.Review.LocationId);
+            ViewData["StateAbbrev"] = new SelectList(_context.State, "StateAbbrev", "StateName", newReview.Review.StateAbbrev);
             return View(newReview);
         }
 
@@ -109,7 +108,7 @@ namespace RateTheRoast.Views
                 return NotFound();
             }
             ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", review.BrewMethodId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", review.LocationId);
+            ViewData["StateAbbrev"] = new SelectList(_context.State, "StateAbbrev", "StateName", review.StateAbbrev);
             return View(review);
         }
 
@@ -118,7 +117,7 @@ namespace RateTheRoast.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,CoffeeId,UserId,DateCreated,DateEdited,BrewMethodId,Price,LocationId,Narrative,Score")] Review review)
+        public async Task<IActionResult> Edit(int id, [Bind("ReviewId,CoffeeId,UserId,DateCreated,DateEdited,BrewMethodId,Price,Narrative,Score")] Review review)
         {
             if (id != review.ReviewId)
             {
@@ -148,7 +147,7 @@ namespace RateTheRoast.Views
                 return RedirectToAction("Reviews", "Coffees", new { id = review.CoffeeId });
             }
             ViewData["BrewMethodId"] = new SelectList(_context.BrewMethod, "BrewMethodId", "Method", review.BrewMethodId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Name", review.LocationId);
+            ViewData["StateAbbrev"] = new SelectList(_context.State, "StateAbbrev", "StateName", review.StateAbbrev);
             return View(review);
         }
 
@@ -163,7 +162,7 @@ namespace RateTheRoast.Views
             var review = await _context.Review
                 .Include(r => r.BrewMethod)
                 .Include(r => r.Coffee)
-                .Include(r => r.Location)
+                .Include(r => r.State)
                 .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.ReviewId == id);
             if (review == null)

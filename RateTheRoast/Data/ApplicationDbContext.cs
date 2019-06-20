@@ -17,7 +17,6 @@ namespace RateTheRoast.Data
         public DbSet<BrewMethod> BrewMethod { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Location> Location { get; set; }
         public DbSet<Roaster> Roaster { get; set; }
         public DbSet<Coffee> Coffee { get; set; }
         public DbSet<Review> Review { get; set; }
@@ -368,40 +367,6 @@ namespace RateTheRoast.Data
                 }
                 );
 
-            modelBuilder.Entity<Location>().HasData(
-                new Location()
-                {
-                    LocationId = 1,
-                    Name = "The Turnip Truck",
-                    Address = "701 Woodland St",
-                    City = "Nashville",
-                    StateAbbrev = "TN"
-                },
-                new Location()
-                {
-                    LocationId = 2,
-                    Name = "Bongo East",
-                    Address = "107 S 11th St",
-                    City = "Nashville",
-                    StateAbbrev = "TN"
-                },
-                new Location()
-                {
-                    LocationId = 3,
-                    Name = "Revelator Coffee Company",
-                    Address = "1817 21st Ave S",
-                    City = "Nashville",
-                    StateAbbrev = "TN"
-                },
-                new Location()
-                {
-                    LocationId = 4,
-                    Name = "Kroger",
-                    Address = "711 Gallatin Ave",
-                    City = "Nashville",
-                    StateAbbrev = "TN"
-                });
-
             ApplicationUser user = new ApplicationUser
             {
                 UserName = "admin@admin.com",
@@ -557,7 +522,9 @@ namespace RateTheRoast.Data
                     UserId = user2.Id,
                     BrewMethodId = 6,
                     Price = 12.99,
-                    LocationId = 2,
+                    PurchaseAddress = "Bongo East",
+                    PurchaseCity = "Nashville",
+                    StateAbbrev = "TN",
                     Narrative = "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!",
                     Score = 9,
                     DateEdited = null
@@ -569,7 +536,9 @@ namespace RateTheRoast.Data
                     UserId = user2.Id,
                     BrewMethodId = 6,
                     Price = 15.99,
-                    LocationId = 1,
+                    PurchaseAddress = "The Turnip Truck",
+                    PurchaseCity = "Nashville",
+                    StateAbbrev = "TN",
                     Narrative = "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ",
                     Score = 9,
                     DateEdited = null

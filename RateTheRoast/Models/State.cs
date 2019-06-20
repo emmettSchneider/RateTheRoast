@@ -10,8 +10,8 @@ namespace RateTheRoast.Models
         public string StateAbbrev { get; set; }
         public string StateName { get; set; }
 
-        public ICollection<Location> Locations { get; set; }
         public ICollection<Roaster> Roasters { get; set; }
         public ICollection<ApplicationUser> Users { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

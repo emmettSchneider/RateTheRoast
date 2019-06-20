@@ -71,35 +71,6 @@ namespace RateTheRoast.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
-                columns: table => new
-                {
-                    LocationId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    StateAbbrev = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Location", x => x.LocationId);
-                    table.ForeignKey(
-                        name: "FK_Location_State_StateAbbrev",
-                        column: x => x.StateAbbrev,
-                        principalTable: "State",
-                        principalColumn: "StateAbbrev",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Location_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roaster",
                 columns: table => new
                 {
@@ -198,7 +169,9 @@ namespace RateTheRoast.Data.Migrations
                     DateEdited = table.Column<DateTime>(nullable: true),
                     BrewMethodId = table.Column<int>(nullable: false),
                     Price = table.Column<double>(nullable: false),
-                    LocationId = table.Column<int>(nullable: true),
+                    PurchaseAddress = table.Column<string>(nullable: true),
+                    PurchaseCity = table.Column<string>(nullable: true),
+                    StateAbbrev = table.Column<string>(nullable: true),
                     Narrative = table.Column<string>(nullable: false),
                     Score = table.Column<int>(nullable: false)
                 },
@@ -218,10 +191,10 @@ namespace RateTheRoast.Data.Migrations
                         principalColumn: "CoffeeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Review_Location_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Location",
-                        principalColumn: "LocationId",
+                        name: "FK_Review_State_StateAbbrev",
+                        column: x => x.StateAbbrev,
+                        principalTable: "State",
+                        principalColumn: "StateAbbrev",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Review_AspNetUsers_UserId",
@@ -346,20 +319,9 @@ namespace RateTheRoast.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Handle", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedHandle", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StateAbbrev", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "7aa274b4-b41e-4c12-b162-3d41bbb1fbc1", 0, "Nashville", "f29119dd-f6e5-4064-9379-d462fbd9e179", "admin@admin.com", true, "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEJO+BSQyXLGM+Z/AtzPLWrKsUtBdBbF844n42CC5DtiPZQ2I8aUt7aSFQ98J9RDXNQ==", null, false, "4f71f124-3a0e-43a6-aea1-6f52e5600149", "TN", false, "admin@admin.com" },
-                    { "d50c6628-08a5-48e1-9aa1-7c3669981986", 0, "Chattanooga", "6156724c-c763-4b94-a6d5-3da120932f0e", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEEKfw6CUUo90LGdGkz3IJ7Kwc3+jQ0gnQKHEPCL1Ww81WOvUwddQpU51et/ENWcQOQ==", null, false, "cabe7d36-944e-40d5-9fdd-297d84a22d98", "TN", false, "barnyardbarista@hotmail.com" },
-                    { "fd1e163a-a6f6-459f-ab3b-a536c1e15a57", 0, "Nashville", "949e30f5-37ba-40fc-a4cc-7a42f89f2a77", "info@bongojava.com", true, "BongoJava", false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEAVJM6ptIEQHigQotq7lBfi2qBWXdyELo/T0tuTVZU1n3vy/aupHOYPMln3+K/NpJg==", null, false, "e53f5641-3d6b-4107-be54-35131fe92ba7", "TN", false, "info@bongojava.com" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Location",
-                columns: new[] { "LocationId", "Address", "City", "Name", "StateAbbrev", "UserId" },
-                values: new object[,]
-                {
-                    { 1, "701 Woodland St", "Nashville", "The Turnip Truck", "TN", null },
-                    { 2, "107 S 11th St", "Nashville", "Bongo East", "TN", null },
-                    { 3, "1817 21st Ave S", "Nashville", "Revelator Coffee Company", "TN", null },
-                    { 4, "711 Gallatin Ave", "Nashville", "Kroger", "TN", null }
+                    { "ada48f36-1a43-418d-9eb9-0aa1979749bd", 0, "Nashville", "bca24a23-76b8-41b3-97b7-0be31d29931a", "admin@admin.com", true, "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEF+vFH4DNWNDevRx/sTLdGH3hWwczflYBz6G7LFfSJxw9WtlUlP8d6fASEuU3OFpzA==", null, false, "0e360fde-1184-4e63-972c-d2fafbd2eeea", "TN", false, "admin@admin.com" },
+                    { "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3", 0, "Chattanooga", "058779cf-62f5-46b6-9558-eb7bf6d3a8d5", "barnyardbarista@hotmail.com", true, "BarnyardBarista", false, null, "BARNYARDBARISTA@HOTMAIL.COM", "BARNYARDBARISTA", "BARNYARDBARISTA@HOTMAIL.COM", "AQAAAAEAACcQAAAAEPmCZYQUqfHonIQ4GFJ0efamvpHrFyE1XTmRB3oDzLXidGTSwtfxOOYVcfEyuNm1Wg==", null, false, "dccc01ae-54e1-4b05-bfef-486172fb1f07", "TN", false, "barnyardbarista@hotmail.com" },
+                    { "b9d0608d-1569-4150-bf19-f2bcd472ecb8", 0, "Nashville", "ce7e3cfe-9305-478b-8953-2076555f50ce", "info@bongojava.com", true, "BongoJava", false, null, "INFO@BONGOJAVA.COM", "BONGOJAVA", "INFO@BONGOJAVA.COM", "AQAAAAEAACcQAAAAEGAb3TWM5C3YRW7mO5D2IZFSFV594HhpOqEwW8xsX29fbNHSAmFmVpjwjf3mriZT2A==", null, false, "de7f153a-52bb-44d0-9b73-5925f6773977", "TN", false, "info@bongojava.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -386,7 +348,7 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Roaster",
                 columns: new[] { "RoasterId", "City", "ImagePath", "Name", "StateAbbrev", "UserId" },
-                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "fd1e163a-a6f6-459f-ab3b-a536c1e15a57" });
+                values: new object[] { 1, "Nashville", null, "Bongo Java", "TN", "b9d0608d-1569-4150-bf19-f2bcd472ecb8" });
 
             migrationBuilder.InsertData(
                 table: "Coffee",
@@ -401,22 +363,22 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Favorite",
                 columns: new[] { "FavoriteId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 4, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
+                values: new object[] { 1, 4, "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3" });
 
             migrationBuilder.InsertData(
                 table: "Review",
-                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 2, 6, 4, null, 1, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, 9, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
+                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "Narrative", "Price", "PurchaseAddress", "PurchaseCity", "Score", "StateAbbrev", "UserId" },
+                values: new object[] { 2, 6, 4, null, "I've said it before, and I'll say it again, Frothy Monkey's single origin coffees are underrated. The El Salvador El Manzano Honey gives me apple, orange, and fig. It's also a little nutty, just like me. ", 15.99, "The Turnip Truck", "Nashville", 9, "TN", "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3" });
 
             migrationBuilder.InsertData(
                 table: "Wishlist",
                 columns: new[] { "WishlistId", "CoffeeId", "UserId" },
-                values: new object[] { 1, 2, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
+                values: new object[] { 1, 2, "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3" });
 
             migrationBuilder.InsertData(
                 table: "Review",
-                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "LocationId", "Narrative", "Price", "Score", "UserId" },
-                values: new object[] { 1, 6, 1, null, 2, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, 9, "d50c6628-08a5-48e1-9aa1-7c3669981986" });
+                columns: new[] { "ReviewId", "BrewMethodId", "CoffeeId", "DateEdited", "Narrative", "Price", "PurchaseAddress", "PurchaseCity", "Score", "StateAbbrev", "UserId" },
+                values: new object[] { 1, 6, 1, null, "The Bible Belt Blend is a signature blend for Bongo Java. I'm a big fan. I taste the brown sugar, cocoa, and baked pear mentioned in Bongo Java's description, but I also enjoy hints of blackberry and molasses. Love this roast's name!", 12.99, "Bongo East", "Nashville", 9, "TN", "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_StateAbbrev",
@@ -444,16 +406,6 @@ namespace RateTheRoast.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Location_StateAbbrev",
-                table: "Location",
-                column: "StateAbbrev");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Location_UserId",
-                table: "Location",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Review_BrewMethodId",
                 table: "Review",
                 column: "BrewMethodId");
@@ -464,9 +416,9 @@ namespace RateTheRoast.Data.Migrations
                 column: "CoffeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Review_LocationId",
+                name: "IX_Review_StateAbbrev",
                 table: "Review",
-                column: "LocationId");
+                column: "StateAbbrev");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Review_UserId",
@@ -523,9 +475,6 @@ namespace RateTheRoast.Data.Migrations
                 name: "BrewMethod");
 
             migrationBuilder.DropTable(
-                name: "Location");
-
-            migrationBuilder.DropTable(
                 name: "Coffee");
 
             migrationBuilder.DropTable(
@@ -544,17 +493,17 @@ namespace RateTheRoast.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "7aa274b4-b41e-4c12-b162-3d41bbb1fbc1");
+                keyValue: "7df8c6f8-5079-4e54-9d17-6cecfd4f01a3");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "d50c6628-08a5-48e1-9aa1-7c3669981986");
+                keyValue: "ada48f36-1a43-418d-9eb9-0aa1979749bd");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "fd1e163a-a6f6-459f-ab3b-a536c1e15a57");
+                keyValue: "b9d0608d-1569-4150-bf19-f2bcd472ecb8");
 
             migrationBuilder.DropColumn(
                 name: "City",
