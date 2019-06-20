@@ -9,6 +9,7 @@ namespace RateTheRoast.Models.ViewModels
     {
         public Coffee Coffee { get; set; }
         public Review Review { get; set; }
+        public Roaster Roaster { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

@@ -70,8 +70,7 @@ namespace RateTheRoast.Views
                 .Include(c => c.Roaster)
                 .Include(c => c.Reviews).ThenInclude(c => c.BrewMethod)
                 .Include(c => c.Reviews).ThenInclude(c => c.User)
-                .Include(c => c.Wishlists).ThenInclude(c => c.User)
-                .Include(c => c.Favorites).ThenInclude(c => c.User)
+                .Include(c => c.Reviews).ThenInclude(c => c.State)
                 .FirstOrDefaultAsync(m => m.CoffeeId == id);
 
             if (coffee == null)

@@ -28,8 +28,9 @@
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.StateAbbrev" class="control-label">State</label>
-                <select asp-for="Input.StateAbbrev" class="form-control" asp-items="ViewBag.StateAbbrev"></select>
+                <label asp-for="Input.StateAbbrev"></label>
+                <input asp-for="Input.StateAbbrev" class="form-control" />
+                <span asp-validation-for="Input.StateAbbrev" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
